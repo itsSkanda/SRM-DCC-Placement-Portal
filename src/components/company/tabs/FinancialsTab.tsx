@@ -1,8 +1,8 @@
-import { CompanyFull } from "@/types/schema";
+import { CompanyFullJson } from "@/types/schema";
 import { DollarSign, PieChart, TrendingUp, Briefcase } from "lucide-react";
 
 interface FinancialsTabProps {
-    company: CompanyFull;
+    company: CompanyFullJson;
 }
 
 export function FinancialsTab({ company }: FinancialsTabProps) {

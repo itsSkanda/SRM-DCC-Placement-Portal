@@ -1,63 +1,41 @@
-export interface CompanyShort {
+// ─────────────────────────────────────────────────────────────────────────────
+// AUTHORITATIVE TYPES FROM SCHEMA FILES
+// Source of truth: /schema/company_short.schema.json
+//                  /schema/company_full.schema.json
+//                  /schema/innovx_json.schema.json
+//                  /schema/hiring_rounds_json.schema.json
+//
+// Keys are case-sensitive. No field may appear in UI unless present in schemas.
+// ─────────────────────────────────────────────────────────────────────────────
+
+// ── company_json.short_json ──────────────────────────────────────────────────
+export interface CompanyShortJson {
   company_id: number;
   name: string;
   short_name: string;
   logo_url: string;
   category: string;
-  operating_countries: string; // Delimited string
-  office_locations: string; // Delimited string
+  operating_countries: string;
+  office_locations: string;
   employee_size: string;
   yoy_growth_rate: string | number;
 }
 
-export interface InnovXProject {
-  project_name: string;
-  description?: string;
-  difficulty?: string;
-  skill_mapping?: string;
-  real_world_relevance?: string;
-  problem_statement?: string;
-  target_users?: string;
-  innovation_objective?: string;
-  tier_level?: string;
-  differentiation_factor?: string;
-  aligned_pillar_names?: string[];
-  backend_technologies?: string[];
-  frontend_technologies?: string[];
-  ai_ml_technologies?: string[];
-}
-
-export interface HiringRound {
-  round_number: number;
-  round_name: string;
-  round_category?: string;
-  evaluation_type?: string;
-  assessment_mode?: string;
-  duration?: string;
-  focus?: string;
-  typical_questions?: string;
-}
-
-export interface RoleHiringDetails {
-  role_title: string;
-  compensation: string;
-  benefits?: string;
-  hiring_rounds: HiringRound[];
-}
-
-export interface SkillEntry {
-  skill_area: string;
-  rating: number;
-  topics: string; // Semicolon separated
-  bloom_level?: string;
-}
-
-export interface CompanyFull extends CompanyShort {
+// ── company_json.full_json ───────────────────────────────────────────────────
+export interface CompanyFullJson {
+  company_id: number;
+  name: string;
+  short_name: string;
+  logo_url: string;
+  category: string;
   incorporation_year?: number;
-  overview_text: string;
+  overview_text?: string;
   nature_of_company?: string;
-  headquarters_address: string;
+  headquarters_address?: string;
+  operating_countries?: string;
   office_count?: string;
+  office_locations?: string;
+  employee_size?: string;
   hiring_velocity?: string;
   employee_turnover?: string;
   avg_retention_tenure?: string;
@@ -109,6 +87,7 @@ export interface CompanyFull extends CompanyShort {
   annual_profit?: string;
   revenue_mix?: string;
   valuation?: string;
+  yoy_growth_rate?: string | number;
   profitability_status?: string;
   market_share_percentage?: string;
   key_investors?: string;
@@ -208,9 +187,135 @@ export interface CompanyFull extends CompanyShort {
   mission_clarity?: string;
   sustainability_csr?: string;
   crisis_behavior?: string;
+}
 
-  // Merged Fields
+// ── innovx_json.json_data ────────────────────────────────────────────────────
+// Source: /schema/innovx_json.schema.json
+
+export interface InnovXTrend {
+  trend_name: string;
+  trend_description?: string;
+  time_horizon_years?: number;
+  trend_drivers?: string[];
+  impact_areas?: string[];
+  strategic_importance?: string;
+}
+
+export interface InnovXInnovationRoadmapItem {
+  innovation_theme: string;
+  problem_statement?: string;
+  target_customer?: string;
+  innovation_type?: string;
+  time_horizon?: string;
+  expected_outcome?: string;
+  required_capabilities?: string[];
+  dependent_trend_names?: string[];
+}
+
+export interface InnovXCompetitor {
+  competitor_name: string;
+  competitor_type?: string;
+  core_strength?: string;
+  market_positioning?: string;
+  bet_name?: string;
+  bet_description?: string;
+  innovation_category?: string;
+  futuristic_level?: string;
+  strategic_objective?: string;
+  threat_level?: string;
+}
+
+export interface InnovXStrategicPillar {
+  cto_vision_statement?: string;
+  pillar_name: string;
+  pillar_description?: string;
+  focus_area?: string;
+  key_technologies?: string[];
+  strategic_risks?: string;
+  strategic_assumptions?: string;
+}
+
+export interface InnovXProject {
+  project_name: string;
+  problem_statement?: string;
+  target_users?: string;
+  innovation_objective?: string;
+  tier_level?: string;
+  differentiation_factor?: string;
+  aligned_pillar_names?: string[];
+  architecture_style?: string;
+  backend_technologies?: string[];
+  frontend_technologies?: string[];
+  ai_ml_technologies?: string[];
+  data_storage_processing?: string;
+  integrations_apis?: string[];
+  infrastructure_cloud?: string;
+  security_compliance?: string;
+  primary_use_case?: string;
+  secondary_use_cases?: string[];
+  scenario_description?: string;
+  user_journey_summary?: string;
+  business_value?: string;
+  success_metrics?: string[];
+  // Legacy fields (may be present in some records)
+  description?: string;
+  difficulty?: string;
+  real_world_relevance?: string;
+  skill_mapping?: string;
+}
+
+export interface InnovXMaster {
+  company_name: string;
+  industry?: string;
+  sub_industry?: string;
+  core_business_model?: string;
+  target_market?: string;
+  geographic_focus?: string;
+}
+
+export interface InnovXJsonData {
+  innovx_master?: InnovXMaster;
+  industry_trends?: InnovXTrend[];
+  innovation_roadmap?: InnovXInnovationRoadmapItem[];
+  competitive_landscape?: InnovXCompetitor[];
+  strategic_pillars?: InnovXStrategicPillar[];
   innovx_projects?: InnovXProject[];
-  hiring_roles?: RoleHiringDetails[];
-  skills_analysis?: SkillEntry[];
+}
+
+// ── job_role_details_json.job_role_json ──────────────────────────────────────
+// Source: /schema/hiring_rounds_json.schema.json
+
+export interface SkillSet {
+  skill_set_code: string;
+  typical_questions?: string;
+}
+
+export interface HiringRound {
+  round_number: number;
+  round_name: string;
+  round_category?: string;
+  evaluation_type?: string;
+  assessment_mode?: string;
+  skill_sets?: SkillSet[];
+  // Legacy fields
+  duration?: string;
+  focus?: string;
+  typical_questions?: string;
+}
+
+export interface JobRoleDetail {
+  opportunity_type?: string;
+  role_title: string;
+  role_category?: string;
+  job_description?: string;
+  compensation?: string;
+  ctc_or_stipend?: number;
+  bonus?: string;
+  benefits_summary?: string;
+  hiring_rounds: HiringRound[];
+}
+
+export interface JobRoleDetailsJsonData {
+  company_name?: string;
+  job_role_details: JobRoleDetail[];
 }

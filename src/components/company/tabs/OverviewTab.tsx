@@ -1,8 +1,8 @@
-import { CompanyFull } from "@/types/schema";
-import { Building2, Globe, TrendingUp, Users } from "lucide-react";
+import { CompanyFullJson } from "@/types/schema";
+import { Globe, TrendingUp } from "lucide-react";
 
 interface OverviewTabProps {
-    company: CompanyFull;
+    company: CompanyFullJson;
 }
 
 export function OverviewTab({ company }: OverviewTabProps) {
