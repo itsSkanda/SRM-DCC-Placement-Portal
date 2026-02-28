@@ -74,7 +74,7 @@ export function HiringTab({ hiringData }: HiringTabProps) {
                                 </div>
 
                                 {/* Card */}
-                                <div className="w-[calc(100%-4rem)] md:w-[calc(50%-2.5rem)] bg-white dark:bg-slate-950 p-6 rounded-2xl border border-slate-200 dark:border-slate-800 shadow-sm hover:shadow-md transition-shadow">
+                                <div className="w-[calc(100%-4rem)] md:w-[calc(50%-2.5rem)] bg-white dark:bg-card p-6 rounded-2xl border border-slate-200 dark:border-slate-800 shadow-sm hover:shadow-md transition-shadow">
                                     <div className="flex items-center justify-between mb-3">
                                         <h3 className="font-bold text-slate-900 dark:text-white">{round.round_name ?? 'Not Available'}</h3>
                                         <div className="flex gap-2">

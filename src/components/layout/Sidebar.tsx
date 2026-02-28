@@ -17,7 +17,7 @@ const navItems = [
     { name: 'Companies', href: '/companies', icon: Building2 },
     { name: 'Skill Analytics', href: '/analytics', icon: BarChart2 },
     { name: 'Hiring Rounds', href: '/hiring', icon: Briefcase },
-    { name: 'Insights', href: '/insights', icon: Lightbulb },
+    { name: 'InnovX', href: '/innovx', icon: Lightbulb },
 ];
 
 export default function Sidebar({ mobile = false }: { mobile?: boolean }) {

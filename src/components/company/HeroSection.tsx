@@ -15,14 +15,14 @@ export function HeroSection({ company, onActionClick }: HeroSectionProps) {
     } catch { }
 
     return (
-        <div className="bg-white dark:bg-slate-950 rounded-3xl border border-slate-200 dark:border-slate-800 shadow-sm overflow-hidden p-6 md:p-8 flex flex-col lg:flex-row gap-8 relative transition-colors duration-300">
+        <div className="bg-card rounded-3xl border border-slate-200 dark:border-slate-800 shadow-sm overflow-hidden p-6 md:p-8 flex flex-col lg:flex-row gap-8 relative">
             {/* Background Decoration */}
             <div className="absolute top-0 right-0 w-96 h-96 bg-primary/5 dark:bg-primary/10 rounded-full blur-3xl -translate-y-1/2 translate-x-1/2 pointer-events-none"></div>
 
             {/* Left: Company Identity & Info */}
             <div className="flex-1 space-y-6 z-10">
                 <div className="flex gap-6 items-start">
-                    <div className="w-24 h-24 md:w-32 md:h-32 bg-white dark:bg-slate-900 rounded-2xl border border-slate-100 dark:border-slate-800 p-4 shadow-sm flex items-center justify-center shrink-0">
+                    <div className="w-24 h-24 md:w-32 md:h-32 bg-background rounded-2xl border border-slate-100 dark:border-slate-800 p-4 shadow-sm flex items-center justify-center shrink-0">
                         <div className="relative w-full h-full">
                             <Image
                                 src={(company.logo_url && company.logo_url.startsWith('http')) ? company.logo_url : `https://placehold.co/100x100?text=${encodeURIComponent(company.name?.charAt(0) ?? '?')}`}

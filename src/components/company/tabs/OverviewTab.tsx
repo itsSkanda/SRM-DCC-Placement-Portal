@@ -57,7 +57,7 @@ export function OverviewTab({ company }: OverviewTabProps) {
             </div>
 
             <div className="space-y-6">
-                <div className="bg-white dark:bg-slate-950 border border-slate-200 dark:border-slate-800 rounded-2xl p-6 shadow-sm sticky top-24">
+                <div className="bg-white dark:bg-card border border-slate-200 dark:border-slate-800 rounded-2xl p-6 shadow-sm sticky top-24">
                     <h3 className="font-bold text-slate-900 dark:text-white mb-4">Quick Facts</h3>
                     <div className="space-y-4">
                         <Fact label="CEO" value={company.ceo_name} />

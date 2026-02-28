@@ -1,5 +1,7 @@
 @import "tailwindcss";
 
+@variant dark (&:where(.dark, .dark *));
+
 @theme {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
@@ -100,4 +102,62 @@ body {
 
 * {
   border-color: var(--color-border);
+}
+
+/* ─── Smooth colour transitions (fallback for non-VT browsers) ──────────────
+   Only applied when the View Transitions API is NOT available, so the two
+   approaches never fight each other and cause jank.
+──────────────────────────────────────────────────────────────────────────── */
+@supports not (view-transition-name: none) {
+  * {
+    transition: background-color 0.35s ease, color 0.35s ease, border-color 0.35s ease;
+  }
+}
+
+/* ─── View Transitions API ──────────────────────────────────────────────────
+   Captures GPU-composited before/after snapshots. Only `clip-path` is
+   animated — a compositor-only property — so there is zero layout work.
+   The old state is frozen underneath; the new theme state is revealed as a
+   circle expanding from the toggle button's centre (set via JS custom props).
+──────────────────────────────────────────────────────────────────────────── */
+
+/* Suppress the browser's default cross-fade — we drive the animation below */
+::view-transition-old(root),
+::view-transition-new(root) {
+  animation: none;
+  mix-blend-mode: normal;
+}
+
+/* Old state: frozen in place underneath the incoming frame */
+::view-transition-old(root) {
+  z-index: 1;
+}
+
+/* New state: circular reveal from the toggle button's centre */
+::view-transition-new(root) {
+  z-index: 2;
+  animation: vt-circle-reveal 0.5s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+}
+
+@keyframes vt-circle-reveal {
+  from {
+    /* 0px gives an exact point — avoids the sub-pixel flicker from "0%" */
+    clip-path: circle(0px at var(--vt-origin-x, 50%) var(--vt-origin-y, 2rem));
+  }
+
+  to {
+    /* 150vmax always reaches the farthest corner of any viewport */
+    clip-path: circle(150vmax at var(--vt-origin-x, 50%) var(--vt-origin-y, 2rem));
+  }
+}
+
+/* ─── Accessibility ─────────────────────────────────────────────────────────
+   Instantly switch with no motion for users who prefer reduced motion.
+──────────────────────────────────────────────────────────────────────────── */
+@media (prefers-reduced-motion: reduce) {
+
+  ::view-transition-old(root),
+  ::view-transition-new(root) {
+    animation: none !important;
+  }
 }

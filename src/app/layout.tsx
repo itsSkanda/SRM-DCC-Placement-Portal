@@ -24,7 +24,6 @@ export default function RootLayout({
           attribute="class"
           defaultTheme="system"
           enableSystem
-          disableTransitionOnChange
         >
           <div className="flex h-screen overflow-hidden bg-background">
             <Sidebar />

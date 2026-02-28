@@ -46,7 +46,7 @@ export function CompanyDetailClient({ fullJson, innovxData, hiringData }: Compan
     const hiringRoles = hiringData?.job_role_details ?? [];
 
     return (
-        <div className="min-h-screen bg-slate-50 dark:bg-slate-950 pb-20 fade-in transition-colors">
+        <div className="min-h-screen bg-background pb-20 fade-in">
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-8 space-y-8">
                 <HeroSection company={company} onActionClick={handleActionClick} />
 

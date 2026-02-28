@@ -97,6 +97,11 @@ export function CompaniesClient({ rows }: CompaniesClientProps) {
                                             fill
                                             className="object-contain p-2"
                                             unoptimized
+                                            onError={(e) => {
+                                                const target = e.target as HTMLImageElement;
+                                                target.srcset = "";
+                                                target.src = `https://placehold.co/100x100?text=${encodeURIComponent(company.name?.charAt(0) ?? '?')}`;
+                                            }}
                                         />
                                     </div>
                                     <span
