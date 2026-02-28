@@ -26,7 +26,7 @@ export function InnovXTab({ projects }: InnovXTabProps) {
 
             <div className="grid gap-6">
                 {projects.map((project, index) => (
-                    <div key={index} className="bg-white dark:bg-slate-950 border border-slate-200 dark:border-slate-800 rounded-2xl p-6 md:p-8 hover:shadow-md dark:hover:shadow-slate-900/50 transition-shadow relative overflow-hidden group">
+                    <div key={index} className="bg-white dark:bg-card border border-slate-200 dark:border-slate-800 rounded-2xl p-6 md:p-8 hover:shadow-md dark:hover:shadow-slate-900/50 transition-shadow relative overflow-hidden group">
                         <div className="absolute top-0 right-0 p-4 opacity-5 group-hover:opacity-10 transition-opacity pointer-events-none">
                             <Lightbulb className="w-32 h-32 dark:text-white" />
                         </div>

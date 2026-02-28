@@ -23,7 +23,7 @@ export function FinancialsTab({ company }: FinancialsTabProps) {
             </div>
 
             <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-                <div className="bg-white dark:bg-slate-950 border border-slate-200 dark:border-slate-800 rounded-2xl p-6">
+                <div className="bg-white dark:bg-card border border-slate-200 dark:border-slate-800 rounded-2xl p-6">
                     <h3 className="font-bold text-slate-900 dark:text-white mb-4">Revenue Mix</h3>
                     <div className="space-y-4">
                         {company.revenue_mix?.split(';').map((mix, i) => {
@@ -46,7 +46,7 @@ export function FinancialsTab({ company }: FinancialsTabProps) {
                     </div>
                 </div>
 
-                <div className="bg-white dark:bg-slate-950 border border-slate-200 dark:border-slate-800 rounded-2xl p-6">
+                <div className="bg-white dark:bg-card border border-slate-200 dark:border-slate-800 rounded-2xl p-6">
                     <h3 className="font-bold text-slate-900 dark:text-white mb-4">Investment & Funding</h3>
                     <div className="space-y-4">
                         <div className="flex justify-between border-b border-slate-50 dark:border-slate-800 py-2">
@@ -71,7 +71,7 @@ export function FinancialsTab({ company }: FinancialsTabProps) {
 function MetricCard({ icon: Icon, label, value, color, bg }: any) {
     if (!value) return null;
     return (
-        <div className="bg-white dark:bg-slate-950 border border-slate-200 dark:border-slate-800 p-6 rounded-2xl shadow-sm">
+        <div className="bg-white dark:bg-card border border-slate-200 dark:border-slate-800 p-6 rounded-2xl shadow-sm">
             <div className={`w-12 h-12 rounded-xl ${bg} ${color} flex items-center justify-center mb-4`}>
                 <Icon className="w-6 h-6" />
             </div>
