@@ -22,7 +22,7 @@ const tabs = [
     { id: "business", label: "Business & Market" },
     { id: "financials", label: "Financials" },
     { id: "skills", label: "Skills Analysis" },
-    { id: "innovx", label: "InnovX Projects" },
+    { id: "innox", label: "InnovX Projects" },
     { id: "hiring", label: "Hiring Rounds" },
     { id: "culture", label: "Culture & Life" },
     { id: "strategy", label: "Strategy & Future" },
@@ -46,8 +46,8 @@ export function CompanyDetailClient({ fullJson, innovxData, hiringData }: Compan
     const hiringRoles = hiringData?.job_role_details ?? [];
 
     return (
-        <div className="min-h-screen bg-background pb-20 fade-in">
-            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-8 space-y-8">
+        <div className="min-h-screen bg-white pb-32 fade-in">
+            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-10 space-y-12">
                 <HeroSection company={company} onActionClick={handleActionClick} />
 
                 <section id="tab-content" className="scroll-mt-24">
@@ -58,9 +58,9 @@ export function CompanyDetailClient({ fullJson, innovxData, hiringData }: Compan
 
                         {activeTab === "skills" && <SkillsMatrix hiringData={hiringData} />}
 
-                        {activeTab === "innovx" && <InnovXTab projects={innovxProjects} />}
+                        {activeTab === "innox" && <InnovXTab projects={innovxProjects} companyName={company.name} />}
 
-                        {activeTab === "hiring" && <HiringTab hiringData={hiringData} />}
+                        {activeTab === "hiring" && <HiringTab hiringData={hiringData} companyId={company.company_id} />}
 
                         {activeTab === "financials" && <FinancialsTab company={company} />}
 
@@ -75,7 +75,7 @@ export function CompanyDetailClient({ fullJson, innovxData, hiringData }: Compan
                                         items: [
                                             `TAM: ${company.tam ?? 'Not Available'}`,
                                             `SAM: ${company.sam ?? 'Not Available'}`,
-                                            `SOM: ${company.som != null ? (company.som * 100).toFixed(1) + '%' : 'Not Available'}`,
+                                            `SOM: ${company.som != null ? (company.som! * 100).toFixed(1) + '%' : 'Not Available'}`,
                                         ]
                                     },
                                     { title: "Key Customers", content: company.top_customers },

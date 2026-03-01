@@ -42,7 +42,44 @@ export async function fetchSkillMaster(): Promise<SkillMasterRow[]> {
         console.error('[skill-analytics] fetchSkillMaster error:', error.message);
         return [];
     }
-    return (data ?? []) as SkillMasterRow[];
+
+    const mapping: Record<string, string> = {
+        "coding": "coding",
+        "dsa": "data_structures_and_algorithms",
+        "oop": "object_oriented_programming_and_design",
+        "aptitude": "aptitude_and_problem_solving",
+        "communication": "communication_skills",
+        "ai": "ai_native_engineering",
+        "cloud": "devops_and_cloud",
+        "sql": "sql_and_design",
+        "software": "software_engineering",
+        "system": "system_design_and_architecture",
+        "networking": "computer_networking",
+        "os": "operating_system"
+    };
+
+    const processed = (data ?? []).map(s => {
+        const name = s.skill_set_name.toLowerCase();
+        let short = s.short_name;
+
+        // Try to find a match in our manual mapping first
+        for (const [key, col] of Object.entries(mapping)) {
+            if (name.includes(key)) {
+                short = col;
+                break;
+            }
+        }
+
+        return {
+            ...s,
+            short_name: (short || s.skill_set_name)
+                .toLowerCase()
+                .replace(/\s+/g, '_')
+                .replace(/[^a-z0-9_]/g, '')
+        };
+    });
+
+    return processed as SkillMasterRow[];
 }
 
 /**
@@ -60,5 +97,24 @@ export async function fetchCompanySkillLevels(): Promise<CompanySkillLevelRow[]>
         console.error('[skill-analytics] fetchCompanySkillLevels error:', error.message);
         return [];
     }
-    return (data ?? []) as CompanySkillLevelRow[];
+
+    // Sanitize keys to ensure they match internal short_names
+    // Handles database columns that might have spaces or mixed casing
+    const sanitized = (data ?? []).map(row => {
+        const newRow: any = {};
+        Object.entries(row).forEach(([key, value]) => {
+            // Mapping logic: lowercase and remove spaces/special chars
+            // e.g. "Software Architecture" -> "software_architecture"
+            const cleanKey = key.toLowerCase().replace(/\s+/g, '_').replace(/[^a-z0-9_]/g, '');
+            newRow[cleanKey] = value;
+
+            // Also keep original key just in case
+            if (cleanKey !== key) {
+                newRow[key] = value;
+            }
+        });
+        return newRow as CompanySkillLevelRow;
+    });
+
+    return sanitized;
 }

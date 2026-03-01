@@ -1,0 +1,20 @@
+F:\SRM-DCC-Placement-Portal\analyze-categories.ts:27 'stats' is never reassigned. Use 'const' instead.
+F:\SRM-DCC-Placement-Portal\analyze-categories.ts:37 Unexpected any. Specify a different type.
+F:\SRM-DCC-Placement-Portal\analyze-categories.ts:38 Unexpected any. Specify a different type.
+F:\SRM-DCC-Placement-Portal\analyze-categories.ts:114 'count' is never reassigned. Use 'const' instead.
+F:\SRM-DCC-Placement-Portal\analyze-categories.ts:127 Unexpected any. Specify a different type.
+F:\SRM-DCC-Placement-Portal\analyze-categories.ts:128 'result' is never reassigned. Use 'const' instead.
+F:\SRM-DCC-Placement-Portal\extract_categories.js:1 A `require()` style import is forbidden.
+F:\SRM-DCC-Placement-Portal\extract_categories.js:2 A `require()` style import is forbidden.
+F:\SRM-DCC-Placement-Portal\src\app\companies\CompaniesClient.tsx:180 `'` can be escaped with `&apos;`, `&lsquo;`, `&#39;`, `&rsquo;`.
+F:\SRM-DCC-Placement-Portal\src\app\companies\[id]\hiring-round\[roundId]\page.tsx:133 `"` can be escaped with `&quot;`, `&ldquo;`, `&#34;`, `&rdquo;`.
+F:\SRM-DCC-Placement-Portal\src\app\companies\[id]\hiring-round\[roundId]\page.tsx:133 `"` can be escaped with `&quot;`, `&ldquo;`, `&#34;`, `&rdquo;`.
+F:\SRM-DCC-Placement-Portal\src\app\hiring\HiringPageClient.tsx:188 `"` can be escaped with `&quot;`, `&ldquo;`, `&#34;`, `&rdquo;`.
+F:\SRM-DCC-Placement-Portal\src\app\hiring\HiringPageClient.tsx:188 `"` can be escaped with `&quot;`, `&ldquo;`, `&#34;`, `&rdquo;`.
+F:\SRM-DCC-Placement-Portal\src\app\hiring\HiringPageClient.tsx:206 `"` can be escaped with `&quot;`, `&ldquo;`, `&#34;`, `&rdquo;`.
+F:\SRM-DCC-Placement-Portal\src\app\hiring\HiringPageClient.tsx:206 `"` can be escaped with `&quot;`, `&ldquo;`, `&#34;`, `&rdquo;`.
+F:\SRM-DCC-Placement-Portal\src\components\company\tabs\FinancialsTab.tsx:14 `'` can be escaped with `&apos;`, `&lsquo;`, `&#39;`, `&rsquo;`.
+F:\SRM-DCC-Placement-Portal\src\components\company\tabs\FinancialsTab.tsx:71 Unexpected any. Specify a different type.
+F:\SRM-DCC-Placement-Portal\src\components\company\tabs\InnovXTab.tsx:68 `"` can be escaped with `&quot;`, `&ldquo;`, `&#34;`, `&rdquo;`.
+F:\SRM-DCC-Placement-Portal\src\components\company\tabs\InnovXTab.tsx:68 `"` can be escaped with `&quot;`, `&ldquo;`, `&#34;`, `&rdquo;`.
+F:\SRM-DCC-Placement-Portal\src\components\ui\badge.tsx:4 An interface declaring no members is equivalent to its supertype.

@@ -1,43 +1,46 @@
-import { BarChart2 } from "lucide-react";
+import { Rocket, Shield } from "lucide-react";
 import { SkillAnalyticsClient } from "@/components/analytics/SkillAnalyticsClient";
 
 export const metadata = {
-    title: "Skill Analytics | SRM Placement Intelligence",
-    description: "Cross-company skill level matrix powered by real Supabase data.",
+    title: "Intelligence Portal | Directorate of Career Center",
+    description: "Official Skill Matrix and Strategic Analysis powered by real Supabase data.",
 };
 
 export default function AnalyticsPage() {
     return (
-        <div className="space-y-8 pb-12 fade-in">
-            {/* Page header */}
-            <section className="relative rounded-3xl overflow-hidden bg-gradient-to-br from-indigo-950 to-slate-900 text-white p-8 md:p-12 shadow-xl">
-                <div className="relative z-10 max-w-2xl">
-                    <div className="flex items-center gap-3 mb-4">
-                        <div className="w-10 h-10 rounded-xl bg-white/10 backdrop-blur-sm flex items-center justify-center">
-                            <BarChart2 className="w-5 h-5 text-indigo-300" />
+        <div className="min-h-screen bg-white text-slate-900">
+            <div className="max-w-[1600px] mx-auto space-y-12 p-4 sm:p-6 lg:p-8 pb-32 fade-in">
+
+                {/* Page header - Professional White Style */}
+                <section className="relative rounded-3xl overflow-hidden border border-slate-200 bg-white p-10 md:p-12 shadow-3d">
+                    <div className="relative z-10 max-w-3xl flex flex-col gap-4">
+                        <div className="flex items-center gap-4 mb-4">
+                            <div className="w-16 h-16 rounded-2xl bg-white border border-slate-100 flex items-center justify-center p-2 shadow-3d overflow-hidden">
+                                <img src="/brand/srmicon.png" alt="SRM Logo" className="w-full h-full object-contain" />
+                            </div>
+                            <div>
+                                <div className="flex items-center gap-2 mb-1">
+                                    <span className="text-[12px] font-bold uppercase tracking-[0.2em] text-primary/60">
+                                        Strategic Intelligence
+                                    </span>
+                                </div>
+                                <h1 className="text-4xl md:text-5xl font-black tracking-tight text-slate-900 uppercase">
+                                    Directorate of Career Center
+                                </h1>
+                            </div>
                         </div>
-                        <span className="text-xs font-semibold uppercase tracking-widest text-indigo-300">
-                            Skill Analytics
-                        </span>
+                        <p className="text-slate-500 text-base md:text-lg leading-relaxed max-w-2xl mt-2 font-medium">
+                            Select up to 5 target companies to populate the vanguard matrix. Discover overlapping requirements, pinpoint critical skill gaps, and optimize your preparation priority for the toughest interviews.
+                        </p>
                     </div>
-                    <h1 className="text-3xl md:text-4xl font-bold mb-3 bg-clip-text text-transparent bg-gradient-to-r from-indigo-100 to-white">
-                        Company Skill Matrix
-                    </h1>
-                    <p className="text-slate-300 text-base md:text-lg leading-relaxed">
-                        Compare skill requirements across all companies at a glance. Each cell
-                        shows the expected proficiency level — from Beginner to Expert.
-                    </p>
-                </div>
+                </section>
 
-                {/* Decorative blobs */}
-                <div className="absolute top-0 right-0 w-72 h-72 bg-indigo-500/20 rounded-full blur-3xl -translate-y-1/2 translate-x-1/3 pointer-events-none" />
-                <div className="absolute bottom-0 left-0 w-48 h-48 bg-purple-500/20 rounded-full blur-3xl translate-y-1/2 -translate-x-1/3 pointer-events-none" />
-            </section>
+                <section>
+                    <SkillAnalyticsClient />
+                </section>
 
-            {/* Data section */}
-            <section>
-                <SkillAnalyticsClient />
-            </section>
-        </div>
+            </div >
+        </div >
     );
 }
+

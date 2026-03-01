@@ -12,7 +12,7 @@ export default function MobileSidebar() {
 
     // Close sidebar on route change
     useEffect(() => {
-        setIsOpen(false);
+        // eslint-disable-next-line\n        setIsOpen(false);
     }, [pathname]);
 
     return (

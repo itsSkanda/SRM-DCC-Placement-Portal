@@ -1,63 +1,58 @@
+import { useState } from 'react';
 import type { SkillMasterRow, CompanySkillLevelRow } from '@/lib/skill-analytics';
+import { HelpCircle, ChevronUp, ChevronDown } from 'lucide-react';
 
 // ─── Bloom's Taxonomy level config ──────────────────────────────────────────────
 
 const LEVEL_CONFIG: Array<{
-    keys: string[];   // substrings / exact codes to match against lower-cased raw value
+    keys: string[];
     code: string;
+    text: string;
     full: string;
-    badge: string;    // coloured badge classes for cells AND legend
+    badge: string;
     dot: string;
-    text: string;     // readable label
+    score: number; // 1 to 10 mapped for the Strength Meter
 }> = [
         {
-            // EV — highest cognitive level
             keys: ['ev', 'evaluation', 'expert', 'advanced+', 'advanced +'],
             code: 'EV',
             text: 'Evaluation',
-            full: 'Can the candidate justify trade-offs and evaluate competing solutions?',
-            badge: 'bg-purple-100 text-purple-800 dark:bg-purple-900/50 dark:text-purple-200 border-purple-200 dark:border-purple-700',
-            dot: 'bg-purple-500',
+            full: 'Justify trade-offs and evaluate competing solutions.',
+            badge: 'bg-amber-50 text-amber-900 border-amber-200/50',
+            dot: 'bg-amber-500',
+            score: 10,
         },
         {
-            // AS — analysis
             keys: ['as', 'analysis', 'advanced', 'upper intermediate', 'upper-intermediate', 'high'],
             code: 'AS',
             text: 'Analysis',
-            full: 'Can the candidate compare approaches and identify components / relationships?',
-            badge: 'bg-orange-100 text-orange-800 dark:bg-orange-900/50 dark:text-orange-200 border-orange-200 dark:border-orange-700',
-            dot: 'bg-orange-500',
+            full: 'Compare approaches and identify components.',
+            badge: 'bg-rose-50 text-rose-900 border-rose-200/50',
+            dot: 'bg-rose-500',
+            score: 8,
         },
         {
-            // AP — application
             keys: ['ap', 'application', 'intermediate', 'medium', 'moderate'],
             code: 'AP',
             text: 'Application',
-            full: 'Can the candidate implement code directly in a standard scenario?',
-            badge: 'bg-green-100 text-green-800 dark:bg-green-900/50 dark:text-green-200 border-green-200 dark:border-green-700',
-            dot: 'bg-green-500',
+            full: 'Implement code directly in standard scenarios.',
+            badge: 'bg-emerald-50 text-emerald-900 border-emerald-200/50',
+            dot: 'bg-emerald-500',
+            score: 5,
         },
         {
-            // CU — lowest: conceptual / recall
             keys: ['cu', 'conceptual', 'beginner', 'basic', 'low', 'foundational'],
             code: 'CU',
             text: 'Conceptual',
-            full: 'Can the candidate define and explain concepts? (Recall / Understand)',
-            badge: 'bg-blue-100 text-blue-800 dark:bg-blue-900/50 dark:text-blue-200 border-blue-200 dark:border-blue-700',
+            full: 'Define and explain foundational concepts.',
+            badge: 'bg-blue-50 text-blue-900 border-blue-200/50',
             dot: 'bg-blue-500',
+            score: 3,
         },
     ];
 
-/** Legend items in ascending cognitive order */
-const LEGEND = LEVEL_CONFIG.slice().reverse(); // CU → AP → AS → EV
+const LEGEND = LEVEL_CONFIG.slice().reverse();
 
-// ─── Helpers ────────────────────────────────────────────────────────────────────
-
-/**
- * Match raw cell value to a Bloom's level.
- * Uses includes() for all keys — lenient enough to handle full words,
- * short codes ("CU", "AP", "AS", "EV"), or mixed-format DB values.
- */
 function getLevelConfig(raw: string | null | undefined) {
     if (!raw) return null;
     const n = raw.trim().toLowerCase();
@@ -67,187 +62,205 @@ function getLevelConfig(raw: string | null | undefined) {
     return null;
 }
 
-function humanize(key: string) {
-    return key.replace(/_/g, ' ').replace(/\b\w/g, (c) => c.toUpperCase());
-}
-
-const EXCLUDED_KEYS = new Set([
-    'id', 'companies', 'processed', 'processed_at',
-    'error_message', 'created_at', 'updated_at',
-]);
-
-// ─── Props ──────────────────────────────────────────────────────────────────────
-
 export interface SkillTableProps {
     skills: SkillMasterRow[];
-    rows: CompanySkillLevelRow[];
+    companies: CompanySkillLevelRow[];
 }
 
-// ─── Component ──────────────────────────────────────────────────────────────────
+export function SkillTable({ skills, companies }: SkillTableProps) {
+    const [sortCompanyId, setSortCompanyId] = useState<number | null>(null);
+    const [sortDesc, setSortDesc] = useState<boolean>(true);
 
-export function SkillTable({ skills, rows }: SkillTableProps) {
-    if (rows.length === 0) {
-        return (
-            <div className="text-center py-20 text-muted-foreground">
-                <p className="text-lg font-medium">No skill data available.</p>
-                <p className="text-sm mt-1 opacity-70">
-                    staging_company_skill_levels has no rows.
-                </p>
-            </div>
-        );
+    if (companies.length === 0) return null;
+
+    // Helper to find skill value with fuzzy key matching
+    const getSkillValue = (company: CompanySkillLevelRow, skill: SkillMasterRow) => {
+        const key = skill.short_name;
+        if (company[key]) return company[key] as string;
+
+        // Try lowercase/clean variant
+        const cleanKey = key.toLowerCase().replace(/\s+/g, '_').replace(/[^a-z0-9_]/g, '');
+        if (company[cleanKey]) return company[cleanKey] as string;
+
+        // Try case-insensitive original
+        const foundKey = Object.keys(company).find(k => k.toLowerCase() === key.toLowerCase());
+        if (foundKey) return company[foundKey] as string;
+
+        return undefined;
+    };
+
+    // Filter out rows (skills) that have NO data in ANY selected company to keep matrix clean
+    const activeSkills = skills.filter(skill => {
+        return companies.some(c => !!getSkillValue(c, skill));
+    });
+
+    // If sorting is active, sort the activeSkills
+    const displaySkills = [...activeSkills];
+    if (sortCompanyId) {
+        const sortCompany = companies.find(c => c.id === sortCompanyId);
+        if (sortCompany) {
+            displaySkills.sort((a, b) => {
+                const valA = getSkillValue(sortCompany, a);
+                const valB = getSkillValue(sortCompany, b);
+
+                const scoreA = getLevelConfig(valA)?.score ?? 0;
+                const scoreB = getLevelConfig(valB)?.score ?? 0;
+
+                if (scoreA === scoreB) return a.skill_set_name.localeCompare(b.skill_set_name);
+                return sortDesc ? scoreB - scoreA : scoreA - scoreB;
+            });
+        }
     }
 
-    // Build column list from skill_set_master (ordered) + any extras from data
-    const firstRow = rows[0];
-    const dataKeys = Object.keys(firstRow).filter((k) => !EXCLUDED_KEYS.has(k));
-    const masterShortNames = new Set(skills.map((s) => s.short_name));
-
-    const displayColumns: Array<{ key: string; label: string; description: string | null }> = [
-        ...skills
-            .filter((s) => dataKeys.includes(s.short_name))
-            .map((s) => ({ key: s.short_name, label: s.skill_set_name, description: s.skill_set_description })),
-        ...dataKeys
-            .filter((k) => !masterShortNames.has(k))
-            .map((k) => ({ key: k, label: humanize(k), description: null })),
-    ];
-
-    const columns = displayColumns.length > 0
-        ? displayColumns
-        : dataKeys.map((k) => ({ key: k, label: humanize(k), description: null }));
+    const handleSort = (companyId: number) => {
+        if (sortCompanyId === companyId) {
+            if (!sortDesc) {
+                setSortCompanyId(null); // default reset
+            } else {
+                setSortDesc(false);
+            }
+        } else {
+            setSortCompanyId(companyId);
+            setSortDesc(true);
+        }
+    };
 
     return (
-        <div className="space-y-6">
+        <div className="space-y-6 pt-6">
 
-            {/* ── 1. Bloom's Legend — TOP ───────────────────────────────────────── */}
-            <div className="rounded-2xl border border-border bg-card p-4 shadow-sm">
-                <p className="text-xs font-bold uppercase tracking-wider text-muted-foreground mb-3">
-                    Bloom&apos;s Taxonomy — Proficiency Legend
-                </p>
-                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3">
+            {/* Legend (Vercel Style) */}
+            <div className="rounded-3xl border border-slate-100 bg-white p-6 shadow-3d flex flex-col lg:flex-row lg:items-center gap-6">
+                <div>
+                    <p className="text-[10px] font-bold uppercase tracking-[0.2em] text-slate-400 mb-1">
+                        Analysis Legend
+                    </p>
+                    <p className="text-sm font-medium text-slate-700">
+                        Cognitive Depth (Bloom&apos;s Taxonomy)
+                    </p>
+                </div>
+                <div className="flex-1 grid grid-cols-2 md:grid-cols-4 gap-3">
                     {LEGEND.map((item) => (
-                        <div key={item.code} className="flex gap-3 items-start p-3 rounded-xl bg-secondary/40 border border-border">
-                            <span className={`inline-flex items-center justify-center px-2.5 py-1 rounded-full text-[11px] font-bold border shrink-0 mt-0.5 ${item.badge}`}>
-                                {item.code}
-                            </span>
-                            <div className="min-w-0">
-                                <p className="text-sm font-semibold text-foreground leading-tight">{item.text}</p>
-                                <p className="text-[11px] text-muted-foreground leading-snug mt-0.5">{item.full}</p>
+                        <div key={item.code} className="flex flex-col p-3 rounded-xl bg-slate-50/50 border border-slate-100 shadow-sm">
+                            <div className="flex items-center justify-between mb-2">
+                                <span className={`inline-flex items-center justify-center px-2 py-0.5 rounded-md text-[10px] font-bold border ${item.badge}`}>
+                                    {item.code}
+                                </span>
+                                <span className="text-xs font-bold text-slate-500">{item.text}</span>
                             </div>
+                            <p className="text-[10px] text-slate-400 leading-snug">{item.full}</p>
                         </div>
                     ))}
                 </div>
             </div>
 
-            {/* ── 2. Sticky table ───────────────────────────────────────────────── */}
-            {/*
-                KEY sticky-fix notes:
-                - The scroll container MUST have overflow-x-auto and a defined height/width
-                - Sticky cells MUST have an explicit opaque background — NOT bg-inherit from a
-                  semi-transparent parent row — otherwise scrolled content bleeds through
-                - The sticky header uses z-30; sticky body cells use z-20; all other cells z-0
-                - A right box-shadow on the sticky cell creates the "divider" illusion
-            */}
-            <div className="overflow-x-auto rounded-2xl border border-border shadow-sm">
-                <table
-                    className="border-collapse text-sm"
-                    style={{ width: 'max-content', minWidth: '100%' }}
-                >
+            {/* The Heatmap Matrix */}
+            <div className="relative rounded-3xl border border-slate-100 bg-white shadow-3d overflow-x-auto overflow-y-auto max-h-[800px] custom-scrollbar">
+                <table className="border-collapse text-sm w-full text-left">
                     <thead>
                         <tr>
-                            {/* Sticky company th */}
+                            {/* Sticky Top-Left Corner */}
                             <th
-                                scope="col"
-                                style={{ boxShadow: '2px 0 8px -2px rgba(0,0,0,0.12)' }}
-                                className="
-                                    sticky left-0 z-30
-                                    bg-card
-                                    px-4 py-3.5 text-left text-xs font-bold uppercase tracking-wider
-                                    text-muted-foreground border-b border-r border-border
-                                    w-48 min-w-[192px]
-                                "
+                                className="sticky top-0 left-0 z-40 bg-slate-50/95 backdrop-blur-xl px-6 py-4 border-b border-r border-slate-200 min-w-[280px]"
+                                style={{ boxShadow: '2px 2px 10px rgba(0,0,0,0.05)' }}
                             >
-                                Company
+                                <span className="text-[10px] font-bold uppercase tracking-widest text-slate-400 block">Required Skills</span>
+                                <span className="text-sm font-medium text-slate-700 mt-0.5 block">{displaySkills.length} Core Requirements</span>
                             </th>
 
-                            {columns.map((col) => (
+                            {/* Sticky Top Vanguard Companies */}
+                            {companies.map(company => (
                                 <th
-                                    key={col.key}
-                                    scope="col"
-                                    title={col.description ?? col.label}
-                                    className="
-                                        px-3 py-3.5 border-b border-border
-                                        bg-secondary/50 dark:bg-secondary/30
-                                        w-36 min-w-[140px] max-w-[140px]
-                                        align-bottom
-                                    "
+                                    key={company.id}
+                                    className="sticky top-0 z-30 bg-slate-50/95 backdrop-blur-xl px-4 py-4 border-b border-r border-slate-200 min-w-[200px] align-bottom group cursor-pointer hover:bg-white transition-colors"
+                                    onClick={() => handleSort(company.id!)}
                                 >
-                                    <div className="flex flex-col items-center gap-0.5 text-center">
-                                        {/* Wrapped label — no whitespace-nowrap, fixed width forces wrap */}
-                                        <span className="text-foreground font-semibold text-[11px] leading-snug w-full break-words">
-                                            {col.label}
+                                    <div className="flex flex-col items-center justify-center relative">
+                                        <div className="flex items-center justify-center w-8 h-8 rounded bg-white border border-slate-200 shadow-sm mb-3">
+                                            <span className="text-xs font-bold text-slate-600">{company.companies?.substring(0, 1)}</span>
+                                        </div>
+                                        <span className="text-sm font-bold text-slate-800 truncate w-full text-center">
+                                            {company.companies}
                                         </span>
-                                        <span className="font-mono text-[9px] text-muted-foreground/50 w-full text-center truncate">
-                                            {col.key}
-                                        </span>
+                                        <div className="mt-2 text-slate-400 h-4 flex items-center justify-center">
+                                            {sortCompanyId === company.id ? (
+                                                sortDesc ? <ChevronDown className="w-4 h-4 text-primary" /> : <ChevronUp className="w-4 h-4 text-primary" />
+                                            ) : (
+                                                <span className="text-[10px] font-medium opacity-0 group-hover:opacity-100 transition-opacity uppercase tracking-widest">Sort</span>
+                                            )}
+                                        </div>
                                     </div>
                                 </th>
                             ))}
                         </tr>
                     </thead>
+                    <tbody className="divide-y divide-slate-100">
+                        {displaySkills.map(skill => (
+                            <tr key={skill.short_name} className="group/row hover:bg-slate-50/50 transition-colors">
 
-                    <tbody>
-                        {rows.map((row, rowIdx) => (
-                            <tr
-                                key={row.id ?? rowIdx}
-                                className="group transition-colors"
-                            >
-                                {/*
-                                    Sticky company td.
-                                    CRITICAL: both normal AND hover backgrounds must be fully
-                                    OPAQUE (no opacity fraction like /10 or /20). Any transparency
-                                    lets scrolled content bleed through the sticky column.
-                                    bg-card  →  opaque base
-                                    group-hover:bg-secondary  →  opaque hover (no trailing /N)
-                                */}
+                                {/* Sticky Left Skill Column */}
                                 <td
-                                    style={{ boxShadow: '2px 0 8px -2px rgba(0,0,0,0.10)' }}
-                                    className="
-                                        sticky left-0 z-20
-                                        bg-card group-hover:bg-secondary
-                                        px-4 py-3 border-b border-r border-border
-                                        font-semibold text-foreground text-sm
-                                        w-48 min-w-[192px] max-w-[192px] truncate
-                                        transition-colors
-                                    "
-                                    title={row.companies ?? ''}
+                                    className="sticky left-0 z-20 bg-white/95 backdrop-blur-xl px-6 py-4 border-r border-slate-200 group-hover/row:bg-slate-50 transition-colors"
+                                    style={{ boxShadow: '2px 0 10px rgba(0,0,0,0.03)' }}
                                 >
-                                    {row.companies ?? '—'}
+                                    <div className="flex flex-col gap-1">
+                                        <span className="font-semibold text-slate-800">{skill.skill_set_name}</span>
+                                        <span className="text-[10px] font-mono text-slate-400">{skill.short_name}</span>
+                                    </div>
                                 </td>
 
-                                {columns.map((col) => {
-                                    const raw = row[col.key] as string | null | undefined;
+                                {companies.map(company => {
+                                    const raw = getSkillValue(company, skill);
                                     const cfg = getLevelConfig(raw);
 
                                     return (
                                         <td
-                                            key={col.key}
-                                            className="px-3 py-3 text-center border-b border-border w-36 min-w-[140px] max-w-[140px] group-hover:bg-secondary/30 transition-colors"
-                                            title={cfg ? `${cfg.code} – ${cfg.text}: ${cfg.full}` : (raw ?? 'No data')}
+                                            key={`${company.id}-${skill.short_name}`}
+                                            className="px-4 py-4 border-r border-slate-100 relative group/cell"
                                         >
                                             {cfg ? (
-                                                /* ✅ Coloured Bloom's badge — always visible in the cell */
-                                                <span className={`inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-[11px] font-bold border ${cfg.badge}`}>
-                                                    <span className={`w-1.5 h-1.5 rounded-full shrink-0 ${cfg.dot}`} />
-                                                    {cfg.code}
-                                                </span>
-                                            ) : raw ? (
-                                                /* Unrecognised value — show raw text in muted pill */
-                                                <span className="text-[11px] text-muted-foreground px-2 py-0.5 bg-secondary rounded-full border border-border">
-                                                    {String(raw).slice(0, 18)}
-                                                </span>
+                                                <div className="flex flex-col gap-3">
+                                                    {/* Badge and Text */}
+                                                    <div className="flex items-center justify-between">
+                                                        <span className={`inline-flex px-1.5 py-0.5 rounded text-[9px] font-bold border uppercase tracking-wider ${cfg.badge}`}>
+                                                            {cfg.code}
+                                                        </span>
+                                                        <span className="text-xs font-medium text-slate-600">{cfg.text}</span>
+                                                    </div>
+
+                                                    {/* Strength Meter Bar */}
+                                                    <div className="h-1.5 w-full bg-slate-100 rounded-full overflow-hidden shadow-inner flex">
+                                                        <div
+                                                            className={`h-full ${cfg.dot} transition-all duration-1000 ease-out`}
+                                                            style={{ width: `${(cfg.score / 10) * 100}%` }}
+                                                        />
+                                                    </div>
+
+                                                    {/* Glassmorphic Deep-Dive Tooltip (Hover) */}
+                                                    <div className="absolute top-1/2 left-full -translate-y-1/2 ml-4 w-64 p-4 rounded-xl bg-white backdrop-blur-xl border border-slate-200 shadow-2xl opacity-0 invisible group-hover/cell:opacity-100 group-hover/cell:visible transition-all z-50 pointer-events-none scale-95 group-hover/cell:scale-100 origin-left">
+                                                        <div className="flex items-center gap-2 mb-3">
+                                                            <HelpCircle className="w-4 h-4 text-slate-400" />
+                                                            <span className="text-xs font-bold text-slate-900 tracking-widest uppercase">Target Level</span>
+                                                        </div>
+                                                        <p className="text-sm text-slate-600 font-medium mb-4 leading-relaxed">
+                                                            {cfg.full}
+                                                        </p>
+                                                        <div className="space-y-2">
+                                                            <div className="flex justify-between text-[10px] text-slate-400 font-bold uppercase tracking-wider">
+                                                                <span>Intensity</span>
+                                                                <span>{cfg.score}/10</span>
+                                                            </div>
+                                                            <div className="h-1 w-full bg-slate-50 rounded-full overflow-hidden">
+                                                                <div className={`h-full ${cfg.dot}`} style={{ width: `${(cfg.score / 10) * 100}%` }} />
+                                                            </div>
+                                                        </div>
+                                                        {/* Little left triangle */}
+                                                        <div className="absolute top-1/2 -left-1.5 -translate-y-1/2 w-3 h-3 bg-white border-b border-l border-slate-200 rotate-45" />
+                                                    </div>
+                                                </div>
                                             ) : (
-                                                /* No data */
-                                                <span className="block w-2 h-2 rounded-full bg-border/50 mx-auto" aria-label="No data" />
+                                                <div className="flex items-center justify-center h-full opacity-20">
+                                                    <span className="w-1.5 h-1.5 rounded-full bg-slate-300" />
+                                                </div>
                                             )}
                                         </td>
                                     );
@@ -257,6 +270,23 @@ export function SkillTable({ skills, rows }: SkillTableProps) {
                     </tbody>
                 </table>
             </div>
+
+            <style jsx global>{`
+                .custom-scrollbar::-webkit-scrollbar {
+                    width: 6px;
+                    height: 6px;
+                }
+                .custom-scrollbar::-webkit-scrollbar-track {
+                    background: transparent;
+                }
+                .custom-scrollbar::-webkit-scrollbar-thumb {
+                    background: #e2e8f0;
+                    border-radius: 10px;
+                }
+                .custom-scrollbar::-webkit-scrollbar-thumb:hover {
+                    background: #cbd5e1;
+                }
+            `}</style>
         </div>
     );
 }

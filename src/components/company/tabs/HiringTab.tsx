@@ -1,11 +1,13 @@
+import { cn } from "@/lib/utils";
 import { JobRoleDetailsJsonData } from "@/types/schema";
 import { CheckCircle2, Clock, MessageSquare, Code, DollarSign } from "lucide-react";
 
 interface HiringTabProps {
     hiringData: JobRoleDetailsJsonData | null;
+    companyId: number;
 }
 
-export function HiringTab({ hiringData }: HiringTabProps) {
+export function HiringTab({ hiringData, companyId }: HiringTabProps) {
     const roles = hiringData?.job_role_details ?? [];
 
     if (roles.length === 0) {
@@ -24,32 +26,32 @@ export function HiringTab({ hiringData }: HiringTabProps) {
                     <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 pb-6 border-b border-slate-100 dark:border-slate-800">
                         <div>
                             <div className="flex items-center gap-3 mb-1">
-                                <span className="text-xs font-bold px-2.5 py-1 rounded-full bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300 uppercase tracking-wide">
+                                <span className="h-6 px-2.5 rounded-full bg-blue-50 text-slate-950 text-[10px] font-black uppercase tracking-wider flex items-center justify-center shadow-sm border border-blue-200/50">
                                     {role.opportunity_type ?? 'Employment'}
                                 </span>
                                 {role.role_category && (
-                                    <span className="text-xs font-bold px-2.5 py-1 rounded-full bg-blue-50 dark:bg-blue-950/30 text-blue-600 dark:text-blue-300">
+                                    <span className="h-6 px-2.5 rounded-full bg-blue-50 text-slate-950 text-[10px] font-black uppercase tracking-wider flex items-center justify-center shadow-sm border border-blue-200/50">
                                         {role.role_category}
                                     </span>
                                 )}
                             </div>
-                            <h2 className="text-2xl font-bold text-slate-900 dark:text-white">{role.role_title ?? 'Not Available'}</h2>
+                            <h2 className="text-2xl font-bold text-slate-900 leading-tight">{role.role_title ?? 'Not Available'}</h2>
                             {role.job_description && (
-                                <p className="text-slate-500 dark:text-slate-400 mt-1 text-sm max-w-2xl line-clamp-2">{role.job_description}</p>
+                                <p className="text-slate-600 mt-1 text-sm max-w-2xl line-clamp-2 leading-relaxed">{role.job_description}</p>
                             )}
                         </div>
-                        <div className="flex flex-col items-end gap-1 shrink-0">
-                            <div className="flex items-center gap-1 text-xl font-bold text-emerald-600 dark:text-emerald-400">
+                        <div className="flex flex-col items-end gap-0.5 shrink-0">
+                            <div className="flex items-center gap-1 text-xl font-black text-slate-950">
                                 <DollarSign className="w-5 h-5" />
                                 {role.ctc_or_stipend
                                     ? `₹${(role.ctc_or_stipend / 100000).toFixed(1)} LPA`
                                     : role.compensation ?? 'Not Available'}
                             </div>
-                            <span className="text-xs text-slate-400 dark:text-slate-500 font-medium uppercase tracking-wide">
+                            <span className="text-[10px] text-slate-400 font-bold uppercase tracking-widest">
                                 {role.compensation === 'Stipend' ? 'Monthly Stipend' : 'Annual CTC'}
                             </span>
                             {role.bonus && (
-                                <p className="text-xs text-slate-500 dark:text-slate-400 text-right max-w-[200px] line-clamp-1" title={role.bonus}>
+                                <p className="text-[10px] text-slate-400 text-right max-w-[200px] line-clamp-1" title={role.bonus}>
                                     + {role.bonus}
                                 </p>
                             )}
@@ -58,77 +60,50 @@ export function HiringTab({ hiringData }: HiringTabProps) {
 
                     {/* Benefits */}
                     {role.benefits_summary && (
-                        <div className="bg-slate-50 dark:bg-slate-900 rounded-xl p-4 border border-slate-100 dark:border-slate-800 text-sm text-slate-700 dark:text-slate-300">
-                            <span className="font-semibold text-slate-900 dark:text-white mr-2">Benefits:</span>
+                        <div className="bg-slate-50 rounded-2xl p-4 border border-slate-100 text-sm text-slate-600 shadow-sm">
+                            <span className="font-bold text-slate-950 uppercase text-[10px] tracking-widest mr-3">Benefits</span>
                             {role.benefits_summary}
                         </div>
                     )}
 
-                    {/* Timeline */}
-                    <div className="relative space-y-8 before:absolute before:inset-0 before:ml-5 before:-translate-x-px md:before:mx-auto md:before:translate-x-0 before:h-full before:w-0.5 before:bg-gradient-to-b before:from-transparent before:via-slate-300 dark:before:via-slate-700 before:to-transparent">
+                    {/* Hiring Rounds Index */}
+                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mt-6">
                         {(role.hiring_rounds ?? []).map((round, index) => (
-                            <div key={index} className="relative flex items-center justify-between md:justify-normal md:odd:flex-row-reverse group is-active">
-                                {/* Icon/Dot */}
-                                <div className="flex items-center justify-center w-10 h-10 rounded-full border border-white dark:border-slate-800 bg-slate-50 dark:bg-slate-900 shadow shrink-0 md:order-1 md:group-odd:-translate-x-1/2 md:group-even:translate-x-1/2 z-10">
-                                    <span className="text-sm font-bold text-slate-600 dark:text-slate-300">{round.round_number ?? index + 1}</span>
+                            <div key={index} className="card-3d p-6 flex flex-col h-full group">
+                                <div className="flex items-start justify-between mb-4">
+                                    <div className="w-8 h-8 rounded-full bg-blue-50 text-slate-950 border border-blue-200 flex items-center justify-center text-xs font-black shadow-sm">
+                                        {round.round_number ?? index + 1}
+                                    </div>
+                                    <div className="flex gap-2 flex-wrap justify-end">
+                                        {round.evaluation_type && (
+                                            <span className="h-6 px-2.5 rounded-md bg-blue-50 text-slate-950 text-[10px] uppercase font-black tracking-wider flex items-center shadow-sm border border-blue-200/50">
+                                                {round.evaluation_type}
+                                            </span>
+                                        )}
+                                        {round.assessment_mode && (
+                                            <span className="h-6 px-2.5 rounded-md bg-slate-100 text-slate-950 text-[10px] uppercase font-black tracking-wider flex items-center shadow-sm border border-slate-200/50">
+                                                {round.assessment_mode}
+                                            </span>
+                                        )}
+                                    </div>
                                 </div>
 
-                                {/* Card */}
-                                <div className="w-[calc(100%-4rem)] md:w-[calc(50%-2.5rem)] bg-white dark:bg-card p-6 rounded-2xl border border-slate-200 dark:border-slate-800 shadow-sm hover:shadow-md transition-shadow">
-                                    <div className="flex items-center justify-between mb-3">
-                                        <h3 className="font-bold text-slate-900 dark:text-white">{round.round_name ?? 'Not Available'}</h3>
-                                        <div className="flex gap-2">
-                                            {round.evaluation_type && (
-                                                <span className={`text-xs font-bold px-2 py-1 rounded-md ${round.evaluation_type === 'HR' ? 'bg-purple-50 text-purple-700 dark:bg-purple-950/30 dark:text-purple-400' : 'bg-blue-50 text-blue-700 dark:bg-blue-950/30 dark:text-blue-400'}`}>
-                                                    {round.evaluation_type}
-                                                </span>
-                                            )}
-                                            {round.assessment_mode && (
-                                                <span className="text-xs font-bold px-2 py-1 rounded-md bg-slate-50 text-slate-600 dark:bg-slate-800 dark:text-slate-300">
-                                                    {round.assessment_mode}
-                                                </span>
-                                            )}
-                                        </div>
-                                    </div>
+                                <h3 className="font-bold text-lg text-slate-950 mb-3 line-clamp-2 leading-snug">
+                                    {round.round_name ?? 'Not Available'}
+                                </h3>
 
-                                    {/* Skill Sets */}
-                                    {(round.skill_sets ?? []).length > 0 && (
-                                        <div className="space-y-3 mt-3">
-                                            {round.skill_sets!.map((skillSet, si) => (
-                                                <div key={si} className="bg-slate-50 dark:bg-slate-900 rounded-lg p-3 border border-slate-100 dark:border-slate-800">
-                                                    <div className="flex gap-2 items-start">
-                                                        <Code className="w-4 h-4 text-primary mt-0.5 shrink-0" />
-                                                        <div>
-                                                            <span className="font-bold text-slate-900 dark:text-white text-xs uppercase block mb-1">
-                                                                {skillSet.skill_set_code}
-                                                            </span>
-                                                            <div className="flex gap-2 items-start">
-                                                                <MessageSquare className="w-3.5 h-3.5 text-slate-400 mt-0.5 shrink-0" />
-                                                                <p className="text-slate-600 dark:text-slate-400 text-xs italic">
-                                                                    "{skillSet.typical_questions ?? 'Not Available'}"
-                                                                </p>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            ))}
-                                        </div>
-                                    )}
-
-                                    {/* Legacy: focus / typical_questions */}
-                                    {!round.skill_sets?.length && round.focus && (
-                                        <div className="text-sm text-slate-700 dark:text-slate-300 mt-2">
-                                            <span className="font-semibold text-slate-900 dark:text-white">Focus:</span> {round.focus}
-                                        </div>
-                                    )}
-                                    {!round.skill_sets?.length && round.typical_questions && (
-                                        <div className="bg-slate-50 dark:bg-slate-900 rounded-lg p-3 text-sm border border-slate-100 dark:border-slate-800 mt-2">
-                                            <div className="flex gap-2 items-start">
-                                                <MessageSquare className="w-4 h-4 text-primary mt-0.5 shrink-0" />
-                                                <p className="text-slate-600 dark:text-slate-400 italic">"{round.typical_questions}"</p>
-                                            </div>
-                                        </div>
-                                    )}
+                                <div className="mt-auto pt-4 flex items-center justify-between border-t border-slate-100">
+                                    <span className="text-[10px] text-slate-400 font-bold uppercase tracking-widest">
+                                        {round.skill_sets?.length || 0} skill sets
+                                    </span>
+                                    {/* The unique identifier for rounds here will be roleIndex-roundIndex */}
+                                    <a
+                                        href={`/companies/${companyId}/hiring-round/${roleIndex}-${index}`}
+                                        className="text-xs font-black text-primary hover:text-primary/80 flex items-center gap-1 group-hover:translate-x-1 transition-transform uppercase tracking-wider"
+                                    >
+                                        View Details
+                                        <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" /></svg>
+                                    </a>
                                 </div>
                             </div>
                         ))}

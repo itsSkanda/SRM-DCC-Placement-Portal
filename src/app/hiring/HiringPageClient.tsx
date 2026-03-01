@@ -27,11 +27,11 @@ function formatCTC(role: JobRoleDetail): string {
 }
 
 const EVAL_COLOURS: Record<string, string> = {
-    Technical: "bg-blue-50 text-blue-700 dark:bg-blue-950/30 dark:text-blue-300",
-    HR: "bg-purple-50 text-purple-700 dark:bg-purple-950/30 dark:text-purple-400",
-    Aptitude: "bg-amber-50 text-amber-700 dark:bg-amber-950/30 dark:text-amber-300",
-    Coding: "bg-green-50 text-green-700 dark:bg-green-950/30 dark:text-green-300",
-    Managerial: "bg-orange-50 text-orange-700 dark:bg-orange-950/30 dark:text-orange-300",
+    Technical: "bg-blue-50 text-slate-950 border border-blue-200/50",
+    HR: "bg-blue-50 text-slate-950 border border-blue-200/50",
+    Aptitude: "bg-blue-50 text-slate-950 border border-blue-200/50",
+    Coding: "bg-blue-50 text-slate-950 border border-blue-200/50",
+    Managerial: "bg-blue-50 text-slate-950 border border-blue-200/50",
 };
 function evalColour(type?: string) {
     if (!type) return "bg-secondary text-muted-foreground border-border";
@@ -47,7 +47,7 @@ function RoundPills({ rounds }: { rounds: HiringRound[] }) {
     return (
         <div className="flex flex-wrap gap-1.5">
             {rounds.map((r, i) => (
-                <span key={i} className={`text-[11px] font-semibold px-2 py-0.5 rounded-full border ${evalColour(r.evaluation_type)}`}>
+                <span key={i} className={`h-6 px-2.5 rounded-full text-[10px] font-black uppercase tracking-wider flex items-center justify-center shadow-sm border-none ${evalColour(r.evaluation_type)}`}>
                     R{r.round_number ?? i + 1} · {r.round_name}
                 </span>
             ))}
@@ -66,19 +66,19 @@ function RoleCard({ role, companyName, companyId }: {
     const rounds = role.hiring_rounds ?? [];
 
     return (
-        <div className="bg-card border border-border rounded-2xl overflow-hidden transition-all duration-300 hover:border-primary/30 hover:shadow-md group">
+        <div className="card-3d overflow-hidden group">
             {/* Card header — always visible */}
             <div className="p-5">
                 <div className="flex items-start justify-between gap-3 mb-3">
                     <div className="flex-1 min-w-0">
                         <div className="flex flex-wrap gap-2 mb-2">
                             {role.opportunity_type && (
-                                <span className="text-[11px] font-bold px-2 py-0.5 rounded-full bg-secondary text-muted-foreground uppercase tracking-wide">
+                                <span className="h-6 px-2.5 rounded-full bg-slate-100 text-slate-950 text-[10px] font-black uppercase tracking-wider flex items-center justify-center shadow-sm border border-slate-200/50">
                                     {role.opportunity_type}
                                 </span>
                             )}
                             {role.role_category && (
-                                <span className="text-[11px] font-bold px-2 py-0.5 rounded-full bg-primary/10 text-primary">
+                                <span className="h-6 px-2.5 rounded-full bg-blue-50 text-slate-950 text-[10px] font-black uppercase tracking-wider flex items-center justify-center shadow-sm border border-blue-200/50">
                                     {role.role_category}
                                 </span>
                             )}
@@ -145,7 +145,7 @@ function RoleCard({ role, companyName, companyId }: {
                         <div key={ri} className="flex gap-3">
                             {/* Step number */}
                             <div className="flex flex-col items-center">
-                                <div className="w-8 h-8 rounded-full bg-card border border-border flex items-center justify-center text-xs font-bold text-foreground shrink-0">
+                                <div className="w-8 h-8 rounded-full bg-blue-50 text-slate-950 border border-blue-200 flex items-center justify-center text-xs font-black shrink-0 shadow-sm">
                                     {round.round_number ?? ri + 1}
                                 </div>
                                 {ri < rounds.length - 1 && (
@@ -161,12 +161,12 @@ function RoleCard({ role, companyName, companyId }: {
                                     </span>
                                     <div className="flex gap-1.5">
                                         {round.evaluation_type && (
-                                            <span className={`text-[11px] font-bold px-2 py-0.5 rounded-md ${evalColour(round.evaluation_type)}`}>
+                                            <span className={`h-6 px-2.5 rounded-md text-[10px] font-black uppercase tracking-wider flex items-center shadow-sm ${evalColour(round.evaluation_type)}`}>
                                                 {round.evaluation_type}
                                             </span>
                                         )}
                                         {round.assessment_mode && (
-                                            <span className="text-[11px] font-bold px-2 py-0.5 rounded-md bg-secondary text-muted-foreground">
+                                            <span className="h-6 px-2.5 rounded-md bg-slate-100 text-slate-950 text-[10px] font-black uppercase tracking-wider flex items-center shadow-sm border border-slate-200/50">
                                                 {round.assessment_mode}
                                             </span>
                                         )}

@@ -15,9 +15,9 @@ import {
 const navItems = [
     { name: 'Dashboard', href: '/', icon: LayoutDashboard },
     { name: 'Companies', href: '/companies', icon: Building2 },
-    { name: 'Skill Analytics', href: '/analytics', icon: BarChart2 },
+    { name: 'Skill Analysis', href: '/analytics', icon: BarChart2 },
     { name: 'Hiring Rounds', href: '/hiring', icon: Briefcase },
-    { name: 'InnovX', href: '/innovx', icon: Lightbulb },
+    { name: 'InnovX', href: '/innox', icon: Lightbulb },
 ];
 
 export default function Sidebar({ mobile = false }: { mobile?: boolean }) {
@@ -28,13 +28,18 @@ export default function Sidebar({ mobile = false }: { mobile?: boolean }) {
             "w-64 bg-card border-r border-border h-full flex flex-col shadow-sm",
             mobile ? "flex" : "hidden md:flex"
         )}>
-            <div className="p-6 border-b border-border/50">
-                <h1 className="text-xl font-bold bg-gradient-to-r from-blue-600 to-indigo-600 bg-clip-text text-transparent">
-                    SRM Placements
-                </h1>
-                <p className="text-xs text-muted-foreground mt-1 tracking-wide uppercase">
-                    Intelligence Portal
-                </p>
+            <div className="p-6 border-b border-border flex items-center gap-3">
+                <div className="w-10 h-10 rounded-full bg-white border border-slate-100 flex items-center justify-center overflow-hidden shrink-0 shadow-sm p-1">
+                    <img src="/brand/srmicon.png" alt="SRM Logo" className="w-full h-full object-contain" />
+                </div>
+                <div>
+                    <h1 className="text-[11px] font-black tracking-tight text-foreground leading-tight uppercase">
+                        SRM Placement Portal
+                    </h1>
+                    <p className="text-[9px] text-muted-foreground mt-0.5 tracking-wider uppercase font-bold">
+                        Directorate of Career Center
+                    </p>
+                </div>
             </div>
 
             <nav className="flex-1 p-4 space-y-1">

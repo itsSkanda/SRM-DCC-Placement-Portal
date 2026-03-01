@@ -1,11 +1,13 @@
 import { InnovXProject } from "@/types/schema";
 import { Lightbulb, Code2, Layers, Award, Target, CheckCircle2 } from "lucide-react";
+import { getCompanyTier } from "@/../lib/tier-mappings";
 
 interface InnovXTabProps {
     projects: InnovXProject[];
+    companyName: string;
 }
 
-export function InnovXTab({ projects }: InnovXTabProps) {
+export function InnovXTab({ projects, companyName }: InnovXTabProps) {
     if (!projects || projects.length === 0) {
         return (
             <div className="p-6 text-center text-slate-500 dark:text-slate-400">
@@ -36,11 +38,14 @@ export function InnovXTab({ projects }: InnovXTabProps) {
                             <div className="flex flex-col md:flex-row md:items-start justify-between gap-4 mb-6">
                                 <div>
                                     <div className="flex flex-wrap items-center gap-3 mb-2">
-                                        {project.tier_level && (
-                                            <span className="flex items-center gap-1 text-xs font-bold text-purple-600 dark:text-purple-400">
-                                                <Award className="w-3.5 h-3.5" /> {project.tier_level}
-                                            </span>
-                                        )}
+                                        {(() => {
+                                            const displayTier = getCompanyTier(companyName, project.tier_level);
+                                            return displayTier && (
+                                                <span className="flex items-center gap-1 text-xs font-bold text-purple-600 dark:text-purple-400">
+                                                    <Award className="w-3.5 h-3.5" /> {displayTier}
+                                                </span>
+                                            );
+                                        })()}
                                         {project.aligned_pillar_names?.map((pillar, pi) => (
                                             <span key={pi} className="text-xs font-medium px-2.5 py-1 rounded-full bg-blue-50 dark:bg-blue-950/30 text-blue-700 dark:text-blue-300 border border-blue-100 dark:border-blue-900/50">
                                                 {pillar}

@@ -7,6 +7,7 @@ import {
     Code2, Layers, Award, ChevronRight, Building2
 } from "lucide-react";
 import type { InnovXProject } from "@/types/schema";
+import { getCompanyTier, normalizeTier } from "@/../lib/tier-mappings";
 
 // ─── Types ──────────────────────────────────────────────────────────────────
 
@@ -20,17 +21,17 @@ interface InnovXCompanyEntry {
 // ─── Helpers ────────────────────────────────────────────────────────────────
 
 const TIER_STYLES: Record<string, string> = {
-    "Tier 1": "text-purple-700 dark:text-purple-300 bg-purple-50 dark:bg-purple-950/40 border-purple-200 dark:border-purple-800",
-    "Tier 2": "text-blue-700 dark:text-blue-300 bg-blue-50 dark:bg-blue-950/40 border-blue-200 dark:border-blue-800",
-    "Tier 3": "text-green-700 dark:text-green-300 bg-green-50 dark:bg-green-950/40 border-green-200 dark:border-green-800",
+    "Tier 1": "text-purple-700 bg-purple-50 border-purple-200",
+    "Tier 2": "text-blue-700 bg-blue-50 border-blue-200",
+    "Tier 3": "text-emerald-700 bg-emerald-50 border-emerald-200",
 };
 
 function tierStyle(tier?: string) {
-    if (!tier) return "text-slate-600 dark:text-slate-400 bg-secondary border-border";
+    if (!tier) return "text-slate-600 bg-slate-100 border-slate-200";
     for (const [k, v] of Object.entries(TIER_STYLES)) {
         if (tier.toLowerCase().includes(k.toLowerCase())) return v;
     }
-    return "text-slate-600 dark:text-slate-400 bg-secondary border-border";
+    return "text-slate-600 bg-slate-100 border-slate-200";
 }
 
 // ─── Project Card ────────────────────────────────────────────────────────────
@@ -51,19 +52,19 @@ function ProjectCard({
     ].slice(0, 6);
 
     return (
-        <div className="group bg-card border border-border rounded-2xl p-5 hover:shadow-lg hover:border-primary/30 transition-all duration-300 flex flex-col relative overflow-hidden">
-            {/* Decorative glow */}
-            <div className="absolute top-0 right-0 w-32 h-32 bg-amber-400/5 rounded-full blur-2xl group-hover:bg-amber-400/10 transition-all duration-500 pointer-events-none" />
-
+        <div className="group bg-white border border-slate-200 rounded-2xl p-5 hover:shadow-lg hover:border-primary/30 transition-all duration-300 flex flex-col relative overflow-hidden">
             {/* Header row */}
             <div className="flex items-start justify-between gap-2 mb-3">
                 <div className="flex flex-wrap gap-2 items-center">
-                    {project.tier_level && (
-                        <span className={`inline-flex items-center gap-1 text-[11px] font-bold px-2 py-0.5 rounded-full border ${tierStyle(project.tier_level)}`}>
-                            <Award className="w-3 h-3" />
-                            {project.tier_level}
-                        </span>
-                    )}
+                    {(() => {
+                        const displayTier = getCompanyTier(companyName, project.tier_level);
+                        return displayTier && (
+                            <span className={`inline-flex items-center gap-1 text-[11px] font-bold px-2 py-0.5 rounded-full border ${tierStyle(displayTier)}`}>
+                                <Award className="w-3 h-3" />
+                                {displayTier}
+                            </span>
+                        );
+                    })()}
                     {project.aligned_pillar_names?.slice(0, 2).map((p, i) => (
                         <span key={i} className="text-[11px] px-2 py-0.5 rounded-full bg-primary/10 text-primary border border-primary/20 font-medium">
                             {p}
@@ -85,7 +86,7 @@ function ProjectCard({
             {/* Problem statement */}
             {project.problem_statement && (
                 <div className="flex-1 mb-4">
-                    <p className="text-xs text-muted-foreground leading-relaxed line-clamp-3 italic">
+                    <p className="text-xs text-slate-500 leading-relaxed line-clamp-3 italic">
                         &ldquo;{project.problem_statement}&rdquo;
                     </p>
                 </div>
@@ -112,7 +113,7 @@ function ProjectCard({
                     <span className="font-medium group-hover/link:underline line-clamp-1 max-w-[160px]">{companyName}</span>
                 </Link>
                 <Link
-                    href={`/companies/${companyId}#innovx`}
+                    href={`/companies/${companyId}#innox`}
                     className="flex items-center gap-1 text-xs font-semibold text-primary opacity-0 group-hover:opacity-100 transition-opacity"
                 >
                     View full <ChevronRight className="w-3.5 h-3.5" />
@@ -162,7 +163,7 @@ export default function InnovXPageClient() {
     // Flatten all projects with company context, then filter
     const filteredProjects = useMemo(() => {
         const q = query.trim().toLowerCase();
-        return entries.flatMap((entry) =>
+        const result = entries.flatMap((entry) =>
             (selectedCompany === "All Companies" || entry.company_name === selectedCompany)
                 ? entry.projects
                     .filter((p) =>
@@ -175,6 +176,22 @@ export default function InnovXPageClient() {
                     .map((p) => ({ project: p, companyName: entry.company_name, companyId: entry.company_id }))
                 : []
         );
+
+        // Sorting: Tier-wise (Tier 1 -> Tier 2 -> Tier 3), then Alphabetically by Project Name
+        result.sort((a, b) => {
+            const tierA = getCompanyTier(a.companyName, a.project.tier_level);
+            const tierB = getCompanyTier(b.companyName, b.project.tier_level);
+
+            const tierComparison = tierA.localeCompare(tierB);
+            if (tierComparison !== 0) {
+                return tierComparison;
+            }
+
+            // Then sort alphabetically
+            return a.project.project_name.localeCompare(b.project.project_name);
+        });
+
+        return result;
     }, [entries, query, selectedCompany]);
 
     // ── States ───────────────────────────────────────────────────────────────
