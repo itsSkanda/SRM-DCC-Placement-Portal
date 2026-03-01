@@ -1,0 +1,930 @@
+[
+  {
+    "id": 1,
+    "name": "Accenture plc",
+    "oldCat": "Enterprise",
+    "tier": "",
+    "maxCtc": 0,
+    "newCat": "IT"
+  },
+  {
+    "id": 2,
+    "name": "Fractal Analytics Private Limited",
+    "oldCat": "Enterprise",
+    "tier": "",
+    "maxCtc": 0,
+    "newCat": "IT"
+  },
+  {
+    "id": 3,
+    "name": "Oracle India Private Limited",
+    "oldCat": "Enterprise",
+    "tier": "",
+    "maxCtc": 0,
+    "newCat": "IT"
+  },
+  {
+    "id": 4,
+    "name": "Google LLC (Subsidiary of Alphabet Inc.)",
+    "oldCat": "Enterprise",
+    "tier": "",
+    "maxCtc": 3200000,
+    "newCat": "Marquee"
+  },
+  {
+    "id": 5,
+    "name": "Apple Inc.",
+    "oldCat": "Enterprise",
+    "tier": "",
+    "maxCtc": 0,
+    "newCat": "IT"
+  },
+  {
+    "id": 6,
+    "name": "Mitsubishi UFJ Financial Group, Inc.",
+    "oldCat": "Enterprise",
+    "tier": "",
+    "maxCtc": 0,
+    "newCat": "IT"
+  },
+  {
+    "id": 7,
+    "name": "Commonwealth Bank of Australia",
+    "oldCat": "Large Cap Public Bank",
+    "tier": "",
+    "maxCtc": 0,
+    "newCat": "IT"
+  },
+  {
+    "id": 8,
+    "name": "KALVI CAREER EDUCATION PRIVATE LIMITED",
+    "oldCat": "Startup ",
+    "tier": "",
+    "maxCtc": 0,
+    "newCat": "Startups"
+  },
+  {
+    "id": 9,
+    "name": "Larsen & Toubro Infotech Limited",
+    "oldCat": "Enterprise IT Services Company",
+    "tier": "",
+    "maxCtc": 0,
+    "newCat": "IT"
+  },
+  {
+    "id": 10,
+    "name": "Tata Consultancy Services Limited",
+    "oldCat": "Enterprise",
+    "tier": "",
+    "maxCtc": 0,
+    "newCat": "IT"
+  },
+  {
+    "id": 11,
+    "name": "Infosys Limited",
+    "oldCat": "Enterprise",
+    "tier": "",
+    "maxCtc": 0,
+    "newCat": "IT"
+  },
+  {
+    "id": 12,
+    "name": "Cloudera Data Platform India Private Limited",
+    "oldCat": "Private Ltd Company ",
+    "tier": "",
+    "maxCtc": 0,
+    "newCat": "IT"
+  },
+  {
+    "id": 13,
+    "name": "Guidewire Software, Inc.",
+    "oldCat": "Public Company",
+    "tier": "",
+    "maxCtc": 0,
+    "newCat": "IT"
+  },
+  {
+    "id": 14,
+    "name": "Amazon.com, Inc.",
+    "oldCat": "Public Enterprise",
+    "tier": "",
+    "maxCtc": 0,
+    "newCat": "IT"
+  },
+  {
+    "id": 15,
+    "name": "Llama Logisol Private Limited",
+    "oldCat": "Startup",
+    "tier": "",
+    "maxCtc": 0,
+    "newCat": "Startups"
+  },
+  {
+    "id": 16,
+    "name": "Swiggy Limited",
+    "oldCat": "Scale-up/Unicorn ",
+    "tier": "",
+    "maxCtc": 0,
+    "newCat": "IT"
+  },
+  {
+    "id": 17,
+    "name": "Leap Finance Private Limited",
+    "oldCat": "Startup",
+    "tier": "",
+    "maxCtc": 0,
+    "newCat": "Startups"
+  },
+  {
+    "id": 18,
+    "name": "Cisco Systems, Inc.",
+    "oldCat": "Enterprise",
+    "tier": "",
+    "maxCtc": 0,
+    "newCat": "IT"
+  },
+  {
+    "id": 19,
+    "name": "Volvo Group",
+    "oldCat": "Enterprise",
+    "tier": "",
+    "maxCtc": 0,
+    "newCat": "IT"
+  },
+  {
+    "id": 20,
+    "name": "Amadeus IT Group",
+    "oldCat": "Enterprise",
+    "tier": "",
+    "maxCtc": 0,
+    "newCat": "IT"
+  },
+  {
+    "id": 21,
+    "name": "NielsenIQ",
+    "oldCat": "Enterprise",
+    "tier": "",
+    "maxCtc": 0,
+    "newCat": "IT"
+  },
+  {
+    "id": 22,
+    "name": "Snowflake Inc.",
+    "oldCat": "Enterprise",
+    "tier": "",
+    "maxCtc": 0,
+    "newCat": "IT"
+  },
+  {
+    "id": 23,
+    "name": "Palantir Technologies",
+    "oldCat": "Enterprise",
+    "tier": "",
+    "maxCtc": 0,
+    "newCat": "IT"
+  },
+  {
+    "id": 24,
+    "name": "Oracle Financial Services Software Limited",
+    "oldCat": "Large Cap / Publicly Listed",
+    "tier": "",
+    "maxCtc": 550000,
+    "newCat": "Dream"
+  },
+  {
+    "id": 36,
+    "name": "Xperi Inc.",
+    "oldCat": "Public Technology & IP Licensing Company",
+    "tier": "",
+    "maxCtc": 0,
+    "newCat": "IT"
+  },
+  {
+    "id": 108,
+    "name": "Simplilearn",
+    "oldCat": "E-Learning / EdTech ",
+    "tier": "",
+    "maxCtc": 0,
+    "newCat": "IT"
+  },
+  {
+    "id": 25,
+    "name": "International Business Machines Corporation ",
+    "oldCat": "Public Enterprise ",
+    "tier": "",
+    "maxCtc": 0,
+    "newCat": "IT"
+  },
+  {
+    "id": 26,
+    "name": "Barclays PLC ",
+    "oldCat": "Public Enterprise ",
+    "tier": "",
+    "maxCtc": 0,
+    "newCat": "IT"
+  },
+  {
+    "id": 27,
+    "name": "Schneider Electric",
+    "oldCat": "Public Enterprise ",
+    "tier": "",
+    "maxCtc": 0,
+    "newCat": "IT"
+  },
+  {
+    "id": 28,
+    "name": "Blink Commerce Private Limited ",
+    "oldCat": "Subsidiary ",
+    "tier": "",
+    "maxCtc": 0,
+    "newCat": "IT"
+  },
+  {
+    "id": 29,
+    "name": "Zerodha Broking Limited ",
+    "oldCat": "Startup",
+    "tier": "",
+    "maxCtc": 0,
+    "newCat": "Startups"
+  },
+  {
+    "id": 30,
+    "name": "Myntra Designs Private Limited",
+    "oldCat": "Subsidiary",
+    "tier": "",
+    "maxCtc": 0,
+    "newCat": "IT"
+  },
+  {
+    "id": 31,
+    "name": "Nurix Therapeutics, Inc.",
+    "oldCat": "Public ",
+    "tier": "",
+    "maxCtc": 0,
+    "newCat": "IT"
+  },
+  {
+    "id": 32,
+    "name": "Citigroup Inc.",
+    "oldCat": "Global Banking & Financial Services Enterprise",
+    "tier": "",
+    "maxCtc": 0,
+    "newCat": "IT"
+  },
+  {
+    "id": 33,
+    "name": "ZS Associates, Inc.",
+    "oldCat": "Private Management",
+    "tier": "",
+    "maxCtc": 0,
+    "newCat": "IT"
+  },
+  {
+    "id": 34,
+    "name": "FLAM Gaming Private Limited",
+    "oldCat": "Startup",
+    "tier": "",
+    "maxCtc": 0,
+    "newCat": "Startups"
+  },
+  {
+    "id": 35,
+    "name": "SAP Labs India Private Limited",
+    "oldCat": "Public Enterprise Technology Company",
+    "tier": "",
+    "maxCtc": 0,
+    "newCat": "IT"
+  },
+  {
+    "id": 37,
+    "name": "Consilio LLC",
+    "oldCat": "Private Legal Technology & Services",
+    "tier": "",
+    "maxCtc": 0,
+    "newCat": "IT"
+  },
+  {
+    "id": 38,
+    "name": "BT Group plc",
+    "oldCat": "Telecommunications",
+    "tier": "",
+    "maxCtc": 0,
+    "newCat": "IT"
+  },
+  {
+    "id": 39,
+    "name": "Capgemini",
+    "oldCat": "IT Services, Consulting, Digital Transformation",
+    "tier": "",
+    "maxCtc": 0,
+    "newCat": "IT"
+  },
+  {
+    "id": 40,
+    "name": "The Bank of New York Mellon Corporation",
+    "oldCat": "Financial Services / Investment Banking",
+    "tier": "",
+    "maxCtc": 0,
+    "newCat": "IT"
+  },
+  {
+    "id": 41,
+    "name": "Fidelity Investments",
+    "oldCat": "Financial Services / Asset Management",
+    "tier": "",
+    "maxCtc": 0,
+    "newCat": "IT"
+  },
+  {
+    "id": 42,
+    "name": "JPMorgan Chase & Co.",
+    "oldCat": "Financial Services / Banking",
+    "tier": "",
+    "maxCtc": 0,
+    "newCat": "IT"
+  },
+  {
+    "id": 43,
+    "name": "Airbus SE",
+    "oldCat": "Aerospace & Defence",
+    "tier": "",
+    "maxCtc": 0,
+    "newCat": "Core"
+  },
+  {
+    "id": 44,
+    "name": "Wells Fargo & Company",
+    "oldCat": "Financial Services / Banking",
+    "tier": "",
+    "maxCtc": 0,
+    "newCat": "IT"
+  },
+  {
+    "id": 45,
+    "name": "Atlassian Corporation",
+    "oldCat": "Enterprise Software / SaaS",
+    "tier": "",
+    "maxCtc": 3800000,
+    "newCat": "Marquee"
+  },
+  {
+    "id": 46,
+    "name": "Nutanix, Inc.",
+    "oldCat": "Enterprise Software / Cloud Infrastructure",
+    "tier": "",
+    "maxCtc": 0,
+    "newCat": "IT"
+  },
+  {
+    "id": 47,
+    "name": "DeepMind",
+    "oldCat": "Artificial Intelligence / Research",
+    "tier": "",
+    "maxCtc": 0,
+    "newCat": "IT"
+  },
+  {
+    "id": 48,
+    "name": "Akamai Technologies India Pvt. Ltd.",
+    "oldCat": "Subsidiary",
+    "tier": "",
+    "maxCtc": 0,
+    "newCat": "IT"
+  },
+  {
+    "id": 50,
+    "name": "Genpact Ltd.",
+    "oldCat": "SMB",
+    "tier": "",
+    "maxCtc": 0,
+    "newCat": "IT"
+  },
+  {
+    "id": 51,
+    "name": "Uber Technologies, Inc.",
+    "oldCat": "SMB",
+    "tier": "",
+    "maxCtc": 0,
+    "newCat": "IT"
+  },
+  {
+    "id": 52,
+    "name": "Dell Technologies Inc.",
+    "oldCat": "Enterprise Technology",
+    "tier": "",
+    "maxCtc": 0,
+    "newCat": "IT"
+  },
+  {
+    "id": 53,
+    "name": "Even Healthcare Private Limited",
+    "oldCat": "HealthTech / InsurTech",
+    "tier": "",
+    "maxCtc": 0,
+    "newCat": "IT"
+  },
+  {
+    "id": 54,
+    "name": "Groww Invest Tech Pvt. Ltd.",
+    "oldCat": "FinTech / WealthTech",
+    "tier": "",
+    "maxCtc": 0,
+    "newCat": "IT"
+  },
+  {
+    "id": 55,
+    "name": "MintAir Corp",
+    "oldCat": "Aviation & Air Mobility Services",
+    "tier": "",
+    "maxCtc": 0,
+    "newCat": "IT"
+  },
+  {
+    "id": 56,
+    "name": "OpenAI, Inc.",
+    "oldCat": "Scale-up",
+    "tier": "",
+    "maxCtc": 0,
+    "newCat": "IT"
+  },
+  {
+    "id": 57,
+    "name": "Skyhigh Security",
+    "oldCat": "Cloud Security / Cybersecurity Software",
+    "tier": "",
+    "maxCtc": 0,
+    "newCat": "IT"
+  },
+  {
+    "id": 58,
+    "name": "Space Exploration Technologies Corp.",
+    "oldCat": "Private Aerospace Manufacturer; Space Transportation; Satellite Communications",
+    "tier": "",
+    "maxCtc": 0,
+    "newCat": "Core"
+  },
+  {
+    "id": 59,
+    "name": "Walmart Inc.",
+    "oldCat": "Multinational Retail Corporation",
+    "tier": "",
+    "maxCtc": 2100000,
+    "newCat": "Marquee"
+  },
+  {
+    "id": 60,
+    "name": "Zepto Technologies Private Limited",
+    "oldCat": "Startup",
+    "tier": "",
+    "maxCtc": 0,
+    "newCat": "Startups"
+  },
+  {
+    "id": 61,
+    "name": "DevRev Cloud India Private Limited",
+    "oldCat": "Startup / Scale-up SaaS",
+    "tier": "",
+    "maxCtc": 0,
+    "newCat": "Startups"
+  },
+  {
+    "id": 62,
+    "name": "Increff Technologies Private Limited",
+    "oldCat": "Startup",
+    "tier": "",
+    "maxCtc": 0,
+    "newCat": "Startups"
+  },
+  {
+    "id": 63,
+    "name": "MoveInSync Technologies Private Limited",
+    "oldCat": "Startup / Scale-up SaaS",
+    "tier": "",
+    "maxCtc": 850000,
+    "newCat": "Startups"
+  },
+  {
+    "id": 64,
+    "name": "NVIDIA Corporation",
+    "oldCat": "Public Enterprise",
+    "tier": "",
+    "maxCtc": 0,
+    "newCat": "IT"
+  },
+  {
+    "id": 92,
+    "name": "Dunzo Digital Private Limited",
+    "oldCat": "Startup",
+    "tier": "",
+    "maxCtc": 0,
+    "newCat": "Startups"
+  },
+  {
+    "id": 65,
+    "name": "ServiceNow, Inc.",
+    "oldCat": "Public Enterprise SaaS Company",
+    "tier": "",
+    "maxCtc": 0,
+    "newCat": "IT"
+  },
+  {
+    "id": 66,
+    "name": "Tredence Inc.",
+    "oldCat": "Scale-up",
+    "tier": "",
+    "maxCtc": 0,
+    "newCat": "IT"
+  },
+  {
+    "id": 67,
+    "name": "CME Group Inc.",
+    "oldCat": "Public",
+    "tier": "",
+    "maxCtc": 0,
+    "newCat": "IT"
+  },
+  {
+    "id": 68,
+    "name": "HCL Technologies Limited",
+    "oldCat": "Public",
+    "tier": "",
+    "maxCtc": 0,
+    "newCat": "IT"
+  },
+  {
+    "id": 69,
+    "name": "Freshworks Inc.",
+    "oldCat": "Software as a Service ",
+    "tier": "",
+    "maxCtc": 0,
+    "newCat": "IT"
+  },
+  {
+    "id": 70,
+    "name": "HP Inc.",
+    "oldCat": "Mature Enterprise",
+    "tier": "",
+    "maxCtc": 0,
+    "newCat": "IT"
+  },
+  {
+    "id": 71,
+    "name": "Koninklijke Philips N.V.",
+    "oldCat": "Health Technology",
+    "tier": "",
+    "maxCtc": 0,
+    "newCat": "IT"
+  },
+  {
+    "id": 72,
+    "name": "Warner Bros. Discovery, Inc.",
+    "oldCat": "Mature Public Media Conglomerate",
+    "tier": "",
+    "maxCtc": 0,
+    "newCat": "IT"
+  },
+  {
+    "id": 73,
+    "name": "HyperVerge Technologies Private Limited",
+    "oldCat": "Startup",
+    "tier": "",
+    "maxCtc": 0,
+    "newCat": "Startups"
+  },
+  {
+    "id": 74,
+    "name": "Motorq Technologies Private Limited",
+    "oldCat": "Startup",
+    "tier": "",
+    "maxCtc": 0,
+    "newCat": "Startups"
+  },
+  {
+    "id": 75,
+    "name": "Autodesk",
+    "oldCat": "Enterprise",
+    "tier": "",
+    "maxCtc": 0,
+    "newCat": "IT"
+  },
+  {
+    "id": 76,
+    "name": "Electronic Arts",
+    "oldCat": "Enterprise",
+    "tier": "",
+    "maxCtc": 0,
+    "newCat": "IT"
+  },
+  {
+    "id": 77,
+    "name": "Morgan Stanley",
+    "oldCat": "Global Investment Bank ",
+    "tier": "",
+    "maxCtc": 0,
+    "newCat": "IT"
+  },
+  {
+    "id": 78,
+    "name": "Microsoft Corporation",
+    "oldCat": "Large Cap Public Tech Conglomerate ",
+    "tier": "",
+    "maxCtc": 2800000,
+    "newCat": "Marquee"
+  },
+  {
+    "id": 79,
+    "name": "Darwinbox Digital Solutions Private Limited",
+    "oldCat": "Startup SaaS",
+    "tier": "",
+    "maxCtc": 0,
+    "newCat": "Startups"
+  },
+  {
+    "id": 80,
+    "name": "Epifi Technologies Private Limited",
+    "oldCat": "FinTech Startup",
+    "tier": "",
+    "maxCtc": 0,
+    "newCat": "Startups"
+  },
+  {
+    "id": 81,
+    "name": "Juspay Technologies Private Limited",
+    "oldCat": "Private Company; Fintech (Payments Infrastructure)",
+    "tier": "",
+    "maxCtc": 0,
+    "newCat": "IT"
+  },
+  {
+    "id": 82,
+    "name": "Flipkart Internet Private Limited",
+    "oldCat": "Private Company; E-commerce / Technology",
+    "tier": "",
+    "maxCtc": 0,
+    "newCat": "IT"
+  },
+  {
+    "id": 83,
+    "name": "Optum",
+    "oldCat": "Healthcare Services, Health IT, Data & Analytics, Pharmacy Care",
+    "tier": "",
+    "maxCtc": 0,
+    "newCat": "IT"
+  },
+  {
+    "id": 84,
+    "name": "PayPal Holdings, Inc.",
+    "oldCat": "FinTech / Digital Payments",
+    "tier": "",
+    "maxCtc": 0,
+    "newCat": "IT"
+  },
+  {
+    "id": 85,
+    "name": "Bajaj Finserv Health Ltd.",
+    "oldCat": "Health Technology / Healthcare Services",
+    "tier": "",
+    "maxCtc": 0,
+    "newCat": "IT"
+  },
+  {
+    "id": 86,
+    "name": "Bain Capability Network",
+    "oldCat": "Management Consulting / Analytics & Capability Center",
+    "tier": "",
+    "maxCtc": 0,
+    "newCat": "IT"
+  },
+  {
+    "id": 87,
+    "name": "Proactively Inc.",
+    "oldCat": "Private SaaS Startup",
+    "tier": "",
+    "maxCtc": 0,
+    "newCat": "Startups"
+  },
+  {
+    "id": 88,
+    "name": "Samsung PRISM",
+    "oldCat": "Corporate Academic Program",
+    "tier": "",
+    "maxCtc": 0,
+    "newCat": "IT"
+  },
+  {
+    "id": 89,
+    "name": "Acko General Insurance Limited",
+    "oldCat": "Startup",
+    "tier": "",
+    "maxCtc": 0,
+    "newCat": "Startups"
+  },
+  {
+    "id": 90,
+    "name": "Robert Bosch GmbH",
+    "oldCat": "Enterprise",
+    "tier": "",
+    "maxCtc": 0,
+    "newCat": "IT"
+  },
+  {
+    "id": 91,
+    "name": "Concentrix Corporation",
+    "oldCat": "Enterprise Services",
+    "tier": "",
+    "maxCtc": 0,
+    "newCat": "IT"
+  },
+  {
+    "id": 93,
+    "name": "Byju’s",
+    "oldCat": "EdTech Private Company",
+    "tier": "",
+    "maxCtc": 0,
+    "newCat": "IT"
+  },
+  {
+    "id": 94,
+    "name": "Cleartrip",
+    "oldCat": "Online Travel Platform",
+    "tier": "",
+    "maxCtc": 0,
+    "newCat": "IT"
+  },
+  {
+    "id": 95,
+    "name": "Cognizant Technology Solutions Corporation",
+    "oldCat": "IT Services and Consulting",
+    "tier": "",
+    "maxCtc": 0,
+    "newCat": "IT"
+  },
+  {
+    "id": 96,
+    "name": "DXC Technology Company",
+    "oldCat": "IT Services and Consulting",
+    "tier": "",
+    "maxCtc": 0,
+    "newCat": "IT"
+  },
+  {
+    "id": 97,
+    "name": "PhysicsWallah Private Limited",
+    "oldCat": "Private Enterprise",
+    "tier": "",
+    "maxCtc": 0,
+    "newCat": "IT"
+  },
+  {
+    "id": 98,
+    "name": "Udemy, Inc.",
+    "oldCat": "Public Enterprise",
+    "tier": "",
+    "maxCtc": 0,
+    "newCat": "IT"
+  },
+  {
+    "id": 99,
+    "name": "NTT DATA",
+    "oldCat": "IT Services, Digital Transformation, Consulting",
+    "tier": "",
+    "maxCtc": 0,
+    "newCat": "IT"
+  },
+  {
+    "id": 100,
+    "name": "Virtusa Corporation",
+    "oldCat": "Private Enterprise",
+    "tier": "",
+    "maxCtc": 0,
+    "newCat": "IT"
+  },
+  {
+    "id": 101,
+    "name": "upGrad Education Private Limited",
+    "oldCat": "Private Enterprise",
+    "tier": "",
+    "maxCtc": 0,
+    "newCat": "IT"
+  },
+  {
+    "id": 102,
+    "name": "ZS Associates, Inc.",
+    "oldCat": "Enterprise",
+    "tier": "",
+    "maxCtc": 0,
+    "newCat": "IT"
+  },
+  {
+    "id": 103,
+    "name": "Wipro Limited",
+    "oldCat": "Enterprise",
+    "tier": "",
+    "maxCtc": 0,
+    "newCat": "IT"
+  },
+  {
+    "id": 104,
+    "name": "Paytm Money",
+    "oldCat": "FinTech / Digital Investment Platform",
+    "tier": "",
+    "maxCtc": 0,
+    "newCat": "IT"
+  },
+  {
+    "id": 105,
+    "name": "Hexagon Capability Center India",
+    "oldCat": "Engineering Software and Digital Solutions GCC",
+    "tier": "",
+    "maxCtc": 0,
+    "newCat": "IT"
+  },
+  {
+    "id": 106,
+    "name": "INDmoney Private Limited",
+    "oldCat": "FinTech Wealth Management Platform",
+    "tier": "",
+    "maxCtc": 0,
+    "newCat": "IT"
+  },
+  {
+    "id": 107,
+    "name": "Tech Mahindra Limited",
+    "oldCat": "Public IT Services & Consulting Company",
+    "tier": "",
+    "maxCtc": 0,
+    "newCat": "IT"
+  },
+  {
+    "id": 109,
+    "name": "BigBasket",
+    "oldCat": "Online Grocery and Quick Commerce",
+    "tier": "",
+    "maxCtc": 0,
+    "newCat": "IT"
+  },
+  {
+    "id": 110,
+    "name": "Ecom Express",
+    "oldCat": "Logistics and Supply Chain",
+    "tier": "",
+    "maxCtc": 0,
+    "newCat": "IT"
+  },
+  {
+    "id": 111,
+    "name": "Kyndryl Holdings Inc.",
+    "oldCat": "Public Enterprise",
+    "tier": "",
+    "maxCtc": 0,
+    "newCat": "IT"
+  },
+  {
+    "id": 112,
+    "name": "One MobiKwik Systems Limited",
+    "oldCat": "Public Fintech",
+    "tier": "",
+    "maxCtc": 0,
+    "newCat": "IT"
+  },
+  {
+    "id": 113,
+    "name": "Shadowfax",
+    "oldCat": "Logistics / Last-mile Delivery / Supply Chain",
+    "tier": "",
+    "maxCtc": 0,
+    "newCat": "IT"
+  },
+  {
+    "id": 114,
+    "name": "Rupeek",
+    "oldCat": "FinTech / Digital Lending / Gold Loans",
+    "tier": "",
+    "maxCtc": 0,
+    "newCat": "IT"
+  },
+  {
+    "id": 115,
+    "name": "3i Infotech Ltd.",
+    "oldCat": "Public Company; IT Services & Digital Transformation",
+    "tier": "",
+    "maxCtc": 0,
+    "newCat": "IT"
+  },
+  {
+    "id": 116,
+    "name": "BharatPe",
+    "oldCat": "Private Company; Fintech (Payments & Lending)",
+    "tier": "",
+    "maxCtc": 0,
+    "newCat": "IT"
+  },
+  {
+    "id": 49,
+    "name": "Adobe Inc.",
+    "oldCat": "SMB",
+    "tier": "",
+    "maxCtc": 0,
+    "newCat": "IT"
+  }
+]

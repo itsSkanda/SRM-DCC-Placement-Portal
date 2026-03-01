@@ -39,7 +39,7 @@ export function ThemeToggle() {
 
             // `startViewTransition` freezes the current frame, applies the
             // setState inside the callback, then tweens between the two frames.
-            ; (document as any).startViewTransition(() => {
+            ; (document as unknown).startViewTransition(() => {
                 setTheme(next)
             })
         } else {

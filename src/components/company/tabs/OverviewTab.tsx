@@ -9,46 +9,52 @@ export function OverviewTab({ company }: OverviewTabProps) {
     return (
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
             <div className="lg:col-span-2 space-y-8">
-                <section>
-                    <h2 className="text-xl font-bold text-slate-900 dark:text-white mb-4">About {company.short_name}</h2>
-                    <p className="text-slate-700 dark:text-slate-300 text-lg leading-relaxed">{company.overview_text}</p>
+                <section className="space-y-4">
+                    <h2 className="text-2xl font-black text-slate-900 tracking-tight">About {company.short_name}</h2>
+                    <p className="text-slate-600 text-xl leading-relaxed font-medium">{company.overview_text}</p>
                 </section>
 
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                    <div className="bg-slate-50 dark:bg-slate-900 border border-slate-100 dark:border-slate-800 rounded-2xl p-6">
-                        <h3 className="font-bold text-slate-900 dark:text-white mb-2 flex items-center gap-2">
-                            <Globe className="w-4 h-4 text-primary" /> Vision
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+                    <div className="card-3d p-8 border-blue-50/50 bg-blue-50/10 transition-all duration-300">
+                        <h3 className="font-black text-xl text-slate-900 mb-4 flex items-center gap-3">
+                            <div className="p-2.5 rounded-xl bg-blue-50">
+                                <Globe className="w-5 h-5 text-blue-600" />
+                            </div>
+                            Vision
                         </h3>
-                        <p className="text-slate-600 dark:text-slate-400">{company.vision_statement}</p>
+                        <p className="text-slate-600 text-lg leading-relaxed font-medium">{company.vision_statement}</p>
                     </div>
-                    <div className="bg-slate-50 dark:bg-slate-900 border border-slate-100 dark:border-slate-800 rounded-2xl p-6">
-                        <h3 className="font-bold text-slate-900 dark:text-white mb-2 flex items-center gap-2">
-                            <TrendingUp className="w-4 h-4 text-primary" /> Mission
+                    <div className="card-3d p-8 border-emerald-50/50 bg-emerald-50/10 transition-all duration-300">
+                        <h3 className="font-black text-xl text-slate-900 mb-4 flex items-center gap-3">
+                            <div className="p-2.5 rounded-xl bg-emerald-50">
+                                <TrendingUp className="w-5 h-5 text-emerald-600" />
+                            </div>
+                            Mission
                         </h3>
-                        <p className="text-slate-600 dark:text-slate-400">{company.mission_statement}</p>
+                        <p className="text-slate-600 text-lg leading-relaxed font-medium">{company.mission_statement}</p>
                     </div>
                 </div>
 
-                <section>
-                    <h2 className="text-xl font-bold text-slate-900 dark:text-white mb-4">Core Values</h2>
-                    <div className="flex flex-wrap gap-3">
+                <section className="space-y-6">
+                    <h2 className="text-2xl font-black text-slate-900 tracking-tight">Core Values</h2>
+                    <div className="flex flex-wrap gap-4">
                         {company.core_values?.split(';').map((val, i) => (
-                            <span key={i} className="px-4 py-2 bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-full text-slate-700 dark:text-slate-200 font-medium shadow-sm">
+                            <span key={i} className="px-6 py-3 bg-white border border-slate-100 rounded-2xl text-slate-700 font-bold shadow-sm hover:shadow-md hover:-translate-y-1 transition-all duration-200 cursor-default">
                                 {val.trim()}
                             </span>
                         ))}
                     </div>
                 </section>
 
-                <section>
-                    <h2 className="text-xl font-bold text-slate-900 dark:text-white mb-4">Recent Milestones</h2>
-                    <ul className="space-y-4">
+                <section className="space-y-6">
+                    <h2 className="text-2xl font-black text-slate-900 tracking-tight">Recent Milestones</h2>
+                    <ul className="space-y-6">
                         {company.recent_news?.split(';').map((news, i) => {
                             const [year, text] = news.split(',');
                             return (
-                                <li key={i} className="flex gap-4 items-start">
-                                    <span className="font-bold text-slate-900 dark:text-white min-w-[3rem]">{year}</span>
-                                    <span className="text-slate-600 dark:text-slate-400">{text}</span>
+                                <li key={news} className="flex gap-6 items-start group">
+                                    <span className="font-black text-primary text-lg min-w-[4rem] p-3 rounded-xl bg-primary/5 text-center group-hover:scale-110 transition-transform duration-200">{year}</span>
+                                    <span className="text-slate-600 text-lg font-medium leading-relaxed pt-2">{text}</span>
                                 </li>
                             )
                         })}
@@ -57,8 +63,8 @@ export function OverviewTab({ company }: OverviewTabProps) {
             </div>
 
             <div className="space-y-6">
-                <div className="bg-white dark:bg-card border border-slate-200 dark:border-slate-800 rounded-2xl p-6 shadow-sm sticky top-24">
-                    <h3 className="font-bold text-slate-900 dark:text-white mb-4">Quick Facts</h3>
+                <div className="bg-white border border-slate-100 rounded-3xl p-8 shadow-3d sticky top-32 transition-all duration-300">
+                    <h3 className="font-black text-2xl text-slate-900 mb-8 border-b border-slate-50 pb-4">Quick Facts</h3>
                     <div className="space-y-4">
                         <Fact label="CEO" value={company.ceo_name} />
                         <Fact label="Founded" value={company.incorporation_year?.toString()} />

@@ -21,19 +21,29 @@ export default async function Home() {
       {/* Hero Section */}
       <section className="relative rounded-3xl overflow-hidden bg-gradient-to-br from-slate-900 to-slate-800 text-white p-6 md:p-14 shadow-xl">
         <div className="relative z-10 max-w-3xl">
-          <h1 className="text-3xl md:text-5xl font-bold mb-4 bg-clip-text text-transparent bg-gradient-to-r from-blue-100 to-white">
-            Company Intelligence Platform
-          </h1>
-          <p className="text-base md:text-xl text-slate-300 mb-8 leading-relaxed">
+          <div className="flex items-center gap-6 mb-8">
+            <div className="w-20 h-20 md:w-24 md:h-24 rounded-3xl bg-white border border-white/20 flex items-center justify-center p-3 shadow-2xl overflow-hidden shrink-0 backdrop-blur-md">
+              <img src="/brand/srmicon.png" alt="SRM Logo" className="w-full h-full object-contain" />
+            </div>
+            <div>
+              <h1 className="text-3xl md:text-5xl font-black bg-clip-text text-transparent bg-gradient-to-r from-blue-100 to-white uppercase tracking-tight leading-tight">
+                Directorate of Career Center
+              </h1>
+              <p className="text-sm md:text-lg text-blue-200/80 font-bold uppercase tracking-[0.2em] mt-1">
+                SRM Placement Portal
+              </p>
+            </div>
+          </div>
+          <p className="text-base md:text-xl text-slate-300 mb-8 leading-relaxed max-w-2xl">
             Explore premium insights, crack placement interviews, and master the skills required for top-tier companies.
           </p>
           <div className="flex flex-col sm:flex-row gap-4">
             <Link href="/companies" className="px-6 py-3 bg-white text-slate-900 rounded-full font-semibold hover:bg-blue-50 transition-colors shadow-lg active:scale-95 duration-200 text-center">
               Browse Companies
             </Link>
-            <button className="px-6 py-3 bg-white/10 backdrop-blur-md border border-white/20 text-white rounded-full font-semibold hover:bg-white/20 transition-colors">
+            <Link href="/analytics" className="px-6 py-3 bg-blue-50/10 text-white border border-white/20 rounded-full font-semibold hover:bg-blue-50/20 transition-all shadow-lg active:scale-95 duration-200 text-center backdrop-blur-sm">
               View Analytics
-            </button>
+            </Link>
           </div>
         </div>
         <div className="absolute top-0 right-0 w-64 md:w-96 h-64 md:h-96 bg-blue-500/20 rounded-full blur-3xl -translate-y-1/2 translate-x-1/2"></div>

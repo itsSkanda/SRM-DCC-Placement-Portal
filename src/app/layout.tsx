@@ -8,8 +8,13 @@ import { ThemeProvider } from "@/components/theme-provider";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: "SRM Placement Intelligence",
-  description: "Premium Company Intelligence Platform",
+  title: "SRM Placement Portal | Directorate of Career Center",
+  description: "Official Company Intelligence Platform by DCC",
+  icons: {
+    icon: "/brand/srmicon.png",
+    shortcut: "/brand/srmicon.png",
+    apple: "/brand/srmicon.png",
+  },
 };
 
 export default function RootLayout({

@@ -12,6 +12,13 @@ export async function GET() {
         fetchCompanySkillLevels(),
     ]);
 
+    console.log("[DEBUG API] Skills Count:", skills.length);
+    console.log("[DEBUG API] First Row Keys:", rows.length > 0 ? Object.keys(rows[0]) : "Empty");
+    if (rows.length > 0) {
+        const atlassian = rows.find(r => r.companies.toLowerCase().includes('atlassian'));
+        console.log("[DEBUG API] Atlassian Raw:", JSON.stringify(atlassian, null, 2));
+    }
+
     return NextResponse.json(
         { skills, rows },
         {

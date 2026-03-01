@@ -19,6 +19,7 @@ export interface CompanyShortJson {
   office_locations: string;
   employee_size: string;
   yoy_growth_rate: string | number;
+  tier_level?: string;
 }
 
 // ── company_json.full_json ───────────────────────────────────────────────────
@@ -187,6 +188,7 @@ export interface CompanyFullJson {
   mission_clarity?: string;
   sustainability_csr?: string;
   crisis_behavior?: string;
+  tier_level?: string;
 }
 
 // ── innovx_json.json_data ────────────────────────────────────────────────────
